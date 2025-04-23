@@ -1,0 +1,82 @@
+﻿@page "/add-auto"
+<PageTitle>Добавление авто</PageTitle>
+
+<div class="container my-5">
+       <h3 class="mb-4 text-center">Добавление авто</h3>
+
+       @if (_isLoaded)
+       {
+              <form name="update-auto" @onsubmit="Save" class="form-container">
+                     <div class="form-group">
+                            <label for="vin">VIN</label>
+                            <input type="text" class="form-control" required maxlength="17" @bind="_auto.Vin" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="year">Год</label>
+                            <input type="number" class="form-control" required maxlength="4" @bind="_auto.Year" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="engine">Двигатель</label>
+                            <input type="text" class="form-control" required maxlength="17" @bind="_auto.Engine" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="body">Кузов</label>
+                            <input type="text" class="form-control" required maxlength="17" @bind="_auto.Body" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="color">Цвет</label>
+                            <input type="color" class="form-control form-control-color" required @bind="_auto.Color" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="number">Гос номер</label>
+                            <input type="text" class="form-control" @bind="_auto.GovNumber" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="passport">Номер паспорта</label>
+                            <input type="text" class="form-control" required @bind="_auto.Passport" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="date">Дата выдачи</label>
+                            <input type="date" class="form-control" required @bind="_auto.PassportDated" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="full_price">Полная стоимость</label>
+                            <input type="number" class="form-control" required @bind="_auto.FullPrice" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="rent_price">Стоимость аренды (1 сутки)</label>
+                            <input type="number" class="form-control" required @bind="_auto.RentPrice" />
+                     </div>
+
+                     <div class="form-group">
+                            <label for="model">Модель</label>
+                            <select name="model" class="form-control">
+                                   @foreach (var model in _models)
+                                   {
+                                          <option value="@model.Id">@model.Name (@model.Brand.Name)</option>
+                                   }
+                            </select>
+                     </div>
+
+                     <div class="form-group">
+                            <label for="">Фото</label>
+                            @* Добавьте логику для загрузки фото *@
+                     </div>
+
+                     <button type="submit" class="btn btn-primary">Сохранить</button>
+              </form>
+       }
+       else
+       {
+              <h5>Загрузка...</h5>
+       }
+</div>

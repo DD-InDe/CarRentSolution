@@ -1,0 +1,115 @@
+﻿@page "/cars"
+@using CarRentSolution.Entity
+@rendermode InteractiveServer
+
+<PageTitle>Автопарк</PageTitle>
+
+<div class="container my-5">
+    <div class="row">
+        <h3>Автопарк</h3>
+    </div>
+    @if (isLoaded)
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поиск" @bind="search"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" @onclick="async () => await LoadCars()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control" @bind="brandId">
+                        <option value="0" selected>Все</option>
+                        @foreach (var item in _brands)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" @onclick="async () => await LoadCars()">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @if (AuthService.IsAuthorized)
+            {
+                <div class="col-md-6">
+                    <button class="btn btn-primary" @onclick="ToCreate">Добавить</button>
+                </div>
+            }
+        </div>
+
+        <div class="row cars-container" style="max-height: 70vh; overflow-y: auto;">
+            @foreach (Auto auto in _autos)
+            {
+                <div class="col-md-4 mb-4" @onclick="() => _selectedAuto = auto">
+                    <div class="card h-100">
+                        @if (auto.AutoPhotos.Count != 0)
+                        {
+                            <img
+                                class="card-img-top" src="data:image/jpeg;base64,@auto.AutoPhotos.First().Photo"
+                                alt="@auto.Model.Brand.Name @auto.Model.Name">
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@auto.Model.Brand.Name @auto.Model.Name</h5>
+                            <p class="card-text">Цена: @auto.RentPrice</p>
+                            <div class="color-indicator" style="background-color: @auto.Color;"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <p style="color: #7f7f7f">Найдено @_autos.Count из @_totalCount автомобилей</p>
+        </div>
+    </div>
+
+    @if (_selectedAuto != null)
+    {
+        <div class="modal" style="display: block;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@_selectedAuto.Model.Brand.Name @_selectedAuto.Model.Name (@_selectedAuto.Year)</h5>
+                    <button type="button" class="close" @onclick="() => _selectedAuto = null">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if (_selectedAuto.AutoPhotos.Count != 0)
+                    {
+                        <img class="modal-img" src="data:image/jpeg;base64,@_selectedAuto.AutoPhotos.First().Photo"/>
+                    }
+                    <p>Цена: @_selectedAuto.RentPrice</p>
+                    <div>
+                        <label>Цвет:</label>
+                        <div class="color-indicator" style="background-color: @_selectedAuto.Color"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if (AuthService.IsAuthorized)
+                    {
+                        <button class="btn btn-primary" @onclick="() => ToEdit(_selectedAuto.Vin)">Редактировать
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary">Забронировать</button>
+                    }
+                    <div>
+                        <button class="btn btn-secondary" @onclick="ShowPrevious" disabled="@IsFirstAuto">Назад</button>
+                        <button class="btn btn-secondary" @onclick="ShowNext" disabled="@IsLastAuto">Вперед</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

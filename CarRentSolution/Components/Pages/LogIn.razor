@@ -1,0 +1,36 @@
+﻿@page "/log-in"
+
+<PageTitle>Авторизация</PageTitle>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="card p-5 shadow">
+        <h3 class="mb-4">Вход в систему</h3>
+
+        <EditForm
+            Model="@_logInModel"
+            FormName="login-form"
+            OnValidSubmit="Authorize">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <InputText
+                    @bind-Value="_logInModel.Email"
+                    id="email"
+                    class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <InputText
+                    id="password"
+                    type="password"
+                    @bind-Value="_logInModel.Password"
+                    class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Войти</button>
+
+            <small class="form-text text-muted mt-2">@_message</small>
+        </EditForm>
+    </div>
+</div>

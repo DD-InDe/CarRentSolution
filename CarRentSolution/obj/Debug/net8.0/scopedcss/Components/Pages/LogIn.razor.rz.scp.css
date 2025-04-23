@@ -1,0 +1,27 @@
+.container[b-75smtxn952] {
+    background-color: #f5f5f5;
+}
+
+.card[b-75smtxn952] {
+    border-radius: 10px;
+    width: 400px;
+}
+
+.form-group[b-75smtxn952] {
+    margin-bottom: 20px;
+}
+
+.form-control[b-75smtxn952] {
+    border-radius: 5px;
+}
+
+.btn-primary[b-75smtxn952] {
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 100%;
+}
+
+.btn-primary:hover[b-75smtxn952] {
+    background-color: #0056b3;
+    border-color: #004a99;
+}

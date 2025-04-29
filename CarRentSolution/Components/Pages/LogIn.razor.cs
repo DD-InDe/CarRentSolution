@@ -31,6 +31,6 @@ public partial class LogIn : ComponentBase
         }
 
         AuthService.AuthEmployee = employee;
-        Navigation.NavigateTo("/");
+        Navigation.NavigateTo("/", true);
     }
 }

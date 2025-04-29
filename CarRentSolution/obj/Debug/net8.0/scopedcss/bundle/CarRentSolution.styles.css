@@ -3,6 +3,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 main[b-j985qzeck3] {
@@ -319,7 +320,7 @@ main[b-j985qzeck3] {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto 1fr auto;
-    grid-gap: 20px;
+    grid-gap: 5px;
 }
 
 .grid-item[b-6zgv3msn57] {
@@ -397,6 +398,7 @@ main[b-j985qzeck3] {
     background-color: #0056b3;
     border-color: #004a99;
 }
+/* _content/CarRentSolution/Components/Pages/OrderView.razor.rz.scp.css */
 /* _content/CarRentSolution/Components/Pages/UpdateAuto.razor.rz.scp.css */
 .form-container[b-vc22ibq5aj] {
     max-width: 600px;

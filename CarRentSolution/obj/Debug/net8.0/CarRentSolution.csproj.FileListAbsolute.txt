@@ -111,3 +111,5 @@ C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\ne
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\LogIn.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\CreateAuto.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\UpdateAuto.razor.rz.scp.css
+C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\CarRentSolution.sourcelink.json
+C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\OrderView.razor.rz.scp.css

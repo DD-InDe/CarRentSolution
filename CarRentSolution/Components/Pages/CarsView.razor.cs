@@ -9,17 +9,18 @@ public partial class CarsView : ComponentBase
 {
     private List<Auto> _autos = new();
     private List<Brand> _brands;
-
     private Auto? _selectedAuto { get; set; }
-    
+
     private string search { get; set; } = String.Empty;
     private int brandId { get; set; }
     private bool isLoaded = false;
-    
+
     private int _selectedIndex => _autos.IndexOf(_selectedAuto);
     private bool IsFirstAuto => _selectedIndex == 0;
     private bool IsLastAuto => _selectedIndex == _autos.Count - 1;
     private int _totalCount = 0;
+
+    private Order Order { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -49,9 +50,15 @@ public partial class CarsView : ComponentBase
         if (search != String.Empty)
         {
             autos = autos
-                .Where(c => c.RentPrice.ToString().Contains(search) ||
-                            c.Model.Name.ToLower().Contains(search.ToLower()) ||
-                            c.Model.Brand.Name.ToLower().Contains(search.ToLower()))
+                .Where(c => c
+                                .RentPrice.ToString()
+                                .Contains(search) ||
+                            c
+                                .Model.Name.ToLower()
+                                .Contains(search.ToLower()) ||
+                            c
+                                .Model.Brand.Name.ToLower()
+                                .Contains(search.ToLower()))
                 .ToList();
         }
 
@@ -62,7 +69,7 @@ public partial class CarsView : ComponentBase
 
         _autos.AddRange(autos);
     }
-    
+
     private void ShowPrevious()
     {
         if (!IsFirstAuto)
@@ -83,9 +90,44 @@ public partial class CarsView : ComponentBase
     {
         Navigation.NavigateTo($"/update-auto/{vin}");
     }
-    
+
     private void ToCreate()
     {
         Navigation.NavigateTo($"/add-auto");
+    }
+
+    private void SelectAuto(Auto auto)
+    {
+        _selectedAuto = auto;
+        if (!AuthService.IsAuthorized)
+            Order = new()
+            {
+                AutoId = _selectedAuto.Vin,
+                DateStartRent = DateOnly.FromDateTime(DateTime.Today),
+                DateEndRent = DateOnly.FromDateTime(DateTime.Today)
+            };
+    }
+
+    private async Task CreateOrder()
+    {
+        try
+        {
+            string[] name = Order.ClientFullName.Split(' ');
+            if (name.Length < 2) return;
+            Order.ClientLastName = name[0];
+            Order.ClientFirstName = name[1];
+
+            if (name.Length == 3)
+                Order.ClientMiddleName = name[2];
+
+            Order.DateCreated = DateOnly.FromDateTime(DateTime.Today);
+            await Db.Context.Orders.AddAsync(Order);
+            await Db.Context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return;
+        }
     }
 }

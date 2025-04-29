@@ -10,6 +10,25 @@ builder
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton(new AuthService());
+builder.Services.AddHttpContextAccessor();
+
+builder
+    .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/log-in";
+        options.LogoutPath = "/log-out";
+        options.ExpireTimeSpan = TimeSpan.FromSeconds(5);
+        options.SlidingExpiration = false;
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("StaffOnly", policy => policy.RequireRole("Admin", "Staff"));
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
+
+builder.Services.AddCascadingAuthenticationState();
+
 
 var app = builder.Build();
 
@@ -20,6 +39,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 

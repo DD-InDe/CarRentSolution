@@ -1,17 +1,17 @@
 services:
-  db:
+  Db:
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: fr_login
       POSTGRES_PASSWORD: fr_pass
-      POSTGRES_DB: fr_db
+      POSTGRES_Db: fr_Db
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - ../2. Init Database:/docker-entrypoint-initdb.d
-      - fr-db-data:/var/lib/postgresql/data
+      - ../2. Init Database:/docker-entrypoint-initDb.d
+      - fr-Db-data:/var/lib/postgresql/data
     ports:
       - "5050:5432"
 
 volumes:
-  fr-db-data:
+  fr-Db-data:

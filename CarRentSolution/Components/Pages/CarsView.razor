@@ -1,11 +1,11 @@
 ﻿@page "/cars"
-@using CarRentSolution.Entity
+@using Microsoft.AspNetCore.Components.Authorization
 
 @rendermode InteractiveServer
 
 <PageTitle>Автопарк</PageTitle>
 
-<div class="container my-5">
+<div class="container my-2">
     <div class="row">
         <h3>Автопарк</h3>
     </div>
@@ -38,15 +38,16 @@
                     </div>
                 </div>
             </div>
-            @if (AuthService.IsAuthorized)
-            {
-                <div class="col-md-6">
-                    <button class="btn btn-primary" @onclick="ToCreate">Добавить</button>
-                </div>
-            }
+            <AuthorizeView>
+                <Authorized>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" style="margin-top: 5px" @onclick="ToCreate">Добавить</button>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
         </div>
 
-        <div class="row cars-container" style="max-height: 70vh; overflow-y: auto;">
+        <div class="row cars-container">
             @foreach (Auto auto in _autos)
             {
                 <div class="col-md-4 mb-4" @onclick="() => SelectAuto(auto)">
@@ -68,11 +69,7 @@
         </div>
     }
 
-    <div class="row">
-        <div class="col-12 text-center">
-            <p style="color: #7f7f7f">Найдено @_autos.Count из @_totalCount автомобилей</p>
-        </div>
-    </div>
+    <p style="color: #7f7f7f; text-align: center; margin: 5px">Найдено @_autos.Count из @_totalCount автомобилей</p>
 
     @if (_selectedAuto != null)
     {
@@ -95,37 +92,40 @@
                         <div class="color-indicator" style="background-color: @_selectedAuto.Color"></div>
                     </div>
                 </div>
-                @if (AuthService.IsAuthorized)
-                {
-                    <button
-                        class="btn btn-primary"
-                        @onclick="() => ToEdit(_selectedAuto.Vin)">Редактировать
-                    </button>
-                }
-                else
-                {
-                    <form
-                        style="padding: 15px; display: flex; flex-direction: column; gap: 10px;" name="order-form"
-                        @onsubmit="CreateOrder">
-                        <label for="mname" class="place">Ваше ФИО:</label>
-                        <input
-                            name="mname" @bind="Order.ClientFullName" placeholder="Ваше фио"
-                            class="form-control"/>
-                        <label for="phone" class="place">Ваш телефон:</label>
-                        <input
-                            id="phone" name="phone" type="text" maxlength="17" required @bind="Order.ClientPhone" placeholder="Ваш номер"
-                            class="form-control"/>
-                        <label for="start" class="place">Аренда с:</label>
-                        <input
-                            name="start" required @bind="Order.DateStartRent" type="date" class="form-control"
-                            placeholder="Аренда с"/>
-                        <label for="end" class="place">Аренда до:</label>
-                        <input
-                            name="end" required @bind="Order.DateEndRent" type="date" class="form-control"
-                            placeholder="Аренда по"/>
-                        <button type="submit" class="btn btn-primary">Забронировать</button>
-                    </form>
-                }
+                <AuthorizeView>
+                    <Authorized>
+                        <button
+                            class="btn btn-primary"
+                            @onclick="() => ToEdit(_selectedAuto.Vin)">Редактировать
+                        </button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <form
+                            style="padding: 15px; display: flex; flex-direction: column; gap: 10px;"
+                            name="order-form"
+                            @onsubmit="CreateOrder">
+                            <label for="mname" class="place">Ваше ФИО:</label>
+                            <input
+                                name="mname" @bind="Order.ClientFullName" placeholder="Ваше фио"
+                                class="form-control"/>
+                            <label for="phone" class="place">Ваш телефон:</label>
+                            <input
+                                id="phone" name="phone" type="text" maxlength="17" required
+                                @bind="Order.ClientPhone"
+                                placeholder="Ваш номер"
+                                class="form-control"/>
+                            <label for="start" class="place">Аренда с:</label>
+                            <input
+                                name="start" required @bind="Order.DateStartRent" type="date" class="form-control"
+                                placeholder="Аренда с"/>
+                            <label for="end" class="place">Аренда до:</label>
+                            <input
+                                name="end" required @bind="Order.DateEndRent" type="date" class="form-control"
+                                placeholder="Аренда по"/>
+                            <button type="submit" class="btn btn-primary">Забронировать</button>
+                        </form>
+                    </NotAuthorized>
+                </AuthorizeView>
                 <div class="modal-footer">
                     <div>
                         <button

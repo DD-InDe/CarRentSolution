@@ -98,7 +98,6 @@ C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\ne
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.CarRentSolution.props
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
-C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\bundle\CarRentSolution.styles.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\projectbundle\CarRentSolution.bundle.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\CarRentS.B7189E4E.Up2Date

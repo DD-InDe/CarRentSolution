@@ -1,5 +1,4 @@
 ﻿using CarRentSolution.Entity;
-using CarRentSolution.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,16 +15,15 @@ public partial class UpdateAuto : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        if (!AuthService.IsAuthorized) Navigation.NavigateTo("/");
         if (_isLoaded) return;
 
         _auto = await Db
-            .Context.Autos.Include(c => c.Model)
+            .Autos.Include(c => c.Model)
             .FirstOrDefaultAsync(c => c.Vin == Vin);
         if (_auto == null) Navigation.NavigateTo("/");
 
         _models = await Db
-            .Context.Models
+            .Models
             .Include(c => c.Brand)
             .ToListAsync();
 
@@ -37,8 +35,8 @@ public partial class UpdateAuto : ComponentBase
     {
         try
         {
-            Db.Context.Autos.Update(_auto);
-            if (await Db.Context.SaveChangesAsync() == 1)
+            Db.Autos.Update(_auto);
+            if (await Db.SaveChangesAsync() == 1)
             {
                 Navigation.NavigateTo("/cars");
             }

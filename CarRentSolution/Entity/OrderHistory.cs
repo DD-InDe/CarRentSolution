@@ -15,9 +15,9 @@ public partial class OrderHistory
 
     public long StatusId { get; set; }
 
-    public long EmployeeId { get; set; }
+    public long? EmployeeId { get; set; }
 
-    public virtual Employee Employee { get; set; } = null!;
+    public virtual Employee? Employee { get; set; }
 
     public virtual Order Order { get; set; } = null!;
 

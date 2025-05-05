@@ -1,6 +1,13 @@
 ﻿@page "/log-out"
+@using Microsoft.AspNetCore.Authentication
 <h3>LogOut</h3>
 
 @code {
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        await HttpContextAccessor.HttpContext.SignOutAsync();
+        Navigation.NavigateTo("/log-in", true);
+    }
+
 }

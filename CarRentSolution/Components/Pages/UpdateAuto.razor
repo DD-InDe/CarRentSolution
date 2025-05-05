@@ -1,5 +1,7 @@
 ﻿@page "/update-auto/{Vin}"
+@using Microsoft.AspNetCore.Authorization
 <PageTitle>Обновление авто</PageTitle>
+@attribute [Authorize("AdminOnly")]
 
 <div class="container my-5">
   <h3 class="mb-4 text-center">Обновление авто</h3>

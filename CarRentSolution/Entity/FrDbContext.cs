@@ -277,7 +277,6 @@ public partial class FrDbContext : DbContext
 
             entity.HasOne(d => d.Employee).WithMany(p => p.OrderHistories)
                 .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("order_history_employee_id_fkey");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderHistories)

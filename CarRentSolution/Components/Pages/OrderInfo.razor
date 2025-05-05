@@ -1,7 +1,236 @@
 ﻿@page "/order/{Id:long}"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+@rendermode InteractiveServer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@attribute [Authorize("StaffOnly")]
 
 <PageTitle>Работа с заявкой</PageTitle>
 
-<h3>Заявка #@Id</h3>
+@if (isLoaded)
+{
+    <div class="order-details">
+        <h3 class="order-title">Заявка #@Id</h3>
 
-<h4>История заявки</h4>
+        <div class="order-card">
+            <h4 class="card-title">Информация о клиенте</h4>
+            <p><strong>Фамилия:</strong> @_order.ClientLastName</p>
+            <p><strong>Имя:</strong> @_order.ClientFirstName</p>
+            <p><strong>Отчество:</strong> @_order.ClientMiddleName</p>
+        </div>
+
+        <div class="order-card">
+            <h4 class="card-title">Информация об автомобиле</h4>
+            <p><strong>Марка:</strong> @_order.Auto.Model.Brand.Name</p>
+            <p><strong>Модель:</strong> @_order.Auto.Model.Name (@_order.Auto.Year)</p>
+            <p><strong>VIN номер автомобиля:</strong> @_order.AutoId</p>
+        </div>
+
+        <div class="order-card">
+            <h4 class="card-title">Детали заявки</h4>
+            <p><strong>Дата создания:</strong> @_order.DateCreated</p>
+            <p><strong>Срок аренды:</strong> @_order.DateStartRent - @_order.DateEndRent (@_days дней)</p>
+            <p><strong>Стоимость:</strong> @_price руб</p>
+        </div>
+
+        <div class="order-actions">
+            @switch (_availableActions)
+            {
+                case 1:
+                    <button @onclick="RejectOrder" class="btn btn-danger">Отказать</button>
+                    <button @onclick="AccessOrder" class="btn btn-primary">В работе</button>
+                    break;
+                case 2:
+                    <button @onclick="CancelOrder" class="btn btn-danger">Отменить</button>
+                    <button @onclick="OpenCreateForm" class="btn btn-success">Оформить аренду</button>
+                    break;
+            }
+        </div>
+
+        @if (_rent != null)
+        {
+            <form
+                name="rent-form"
+                @onsubmit="CreateRent">
+
+                <div class="order-card">
+                    <h4 class="card-title">Аренда</h4>
+                    <div class="form-group">
+                        <label for="datestart">Дата начала аренды</label>
+                        <input
+                            id="datestart"
+                            min="@DateTime.Now"
+                            type="date"
+                            class="form-control"
+                            required
+                            @bind="_rent.DateStart"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="datestart">Дата окончания аренды</label>
+                        <input
+                            id="dateend"
+                            min="@DateTime.Now"
+                            type="date"
+                            class="form-control"
+                            required
+                            @bind="_rent.DateEnd"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="repair">Тип ремонта</label>
+                        <select
+                            class="form-control"
+                            id="repair"
+                            required
+                            @bind="_rent.RepairConditionId">
+                            @foreach (var item in _repairConditions)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="penalties">Пени</label>
+                        <input
+                            id="penalties"
+                            type="number"
+                            class="form-control"
+                            required
+                            @bind="_rent.Penalties"/>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <h4 class="card-title">Арендатор</h4>
+                    @if (_tenant.Id == 0)
+                    {
+                        <label>Арендатора с таким номером нет в базе, добавьте данные вручную</label>
+                        <div class="form-group">
+                            <label for="lastname">Фамилия</label>
+                            <input
+                                id="lastname"
+                                type="text"
+                                class="form-control"
+                                required
+                                @bind="_tenant.LastName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Имя</label>
+                            <input
+                                id="firstname"
+                                type="text"
+                                class="form-control"
+                                required
+                                @bind="_tenant.FirstName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="middlename">Отчество</label>
+                            <input
+                                id="middlename"
+                                type="text"
+                                class="form-control"
+                                required
+                                @bind="_tenant.MiddleName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input
+                                id="phone"
+                                type="text"
+                                maxlength="20"
+                                class="form-control"
+                                required
+                                @bind="_tenant.Phone"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="serial">Серия паспорта</label>
+                            <input
+                                id="serial"
+                                type="text"
+                                maxlength="4"
+                                class="form-control"
+                                required
+                                @bind="_tenant.PassportSerial"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Номер паспорта</label>
+                            <input
+                                id="number"
+                                type="text"
+                                maxlength="6"
+                                class="form-control"
+                                required
+                                @bind="_tenant.PassportNumber"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateissued">Дата выдачи</label>
+                            <input
+                                id="dateissued"
+                                type="date"
+                                class="form-control"
+                                required
+                                @bind="_tenant.PassportDated"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="issuedby">Кем выдан</label>
+                            <input
+                                id="issuedby"
+                                type="text"
+                                class="form-control"
+                                required
+                                @bind="_tenant.PassportIssued"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Адрес проживания</label>
+                            <input
+                                id="address"
+                                type="text"
+                                class="form-control"
+                                required
+                                @bind="_tenant.Address"/>
+                        </div>
+                    }
+                    else
+                    {
+                        <label>@_tenant.LastName @_tenant.FirstName @_tenant.MiddleName</label>
+                    }
+                </div>
+
+
+                <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Сохранить"/>
+            </form>
+        }
+
+        <h4 class="history-title">История заявки</h4>
+        <table>
+            <tr>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Статус</th>
+                <th>Сотрудник</th>
+            </tr>
+            @foreach (var item in _histories)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.Time</td>
+                    <td>@item.Status.Name</td>
+                    <td>
+                        @if (item.Employee != null)
+                        {
+                            <label>@item.Employee.LastName @item.Employee.FirstName</label>
+                        }
+                        else
+                        {
+                            <label>Система</label>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}

@@ -1,5 +1,7 @@
 ﻿@page "/orders"
-@using CarRentSolution.Entity
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize("StaffOnly")]
 
 @rendermode InteractiveServer
 
@@ -64,15 +66,18 @@
         <div class="row cars-container">
             @foreach (Order order in _orders)
             {
-                <div class="col-md-5 mb-4">
+                <div class="col-md-6 mb-4">
                     <div class="card h-100 shadow">
                         <div class="card-body">
                             <h5 class="card-title">@order.DateCreated (@order.AutoId)</h5>
-                            <p class="card-text">Клиент:
+                            <p class="card-text"><b>Клиент:</b>
                                 <br/> @order.ClientLastName @order.ClientFirstName @order.ClientMiddleName</p>
-                            <p class="card-text">Телефон: <br/>@order.ClientPreviewPhone</p>
+                            <p class="card-text">
+                                <b>Номер телефона:</b> <br/>
+                                @order.ClientPreviewPhone
+                            </p>
                             <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-primary">Подробнее</a>
+                                <a href="order/@order.Id" class="btn btn-primary">Подробнее</a>
                             </div>
                         </div>
                     </div>

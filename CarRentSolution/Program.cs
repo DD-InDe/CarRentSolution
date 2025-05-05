@@ -1,5 +1,5 @@
 using CarRentSolution.Components;
-using CarRentSolution.Services;
+using CarRentSolution.Entity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +9,9 @@ builder
     .Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton(new AuthService());
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddDbContext<FrDbContext>();
 
 builder
     .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -18,8 +19,8 @@ builder
     {
         options.LoginPath = "/log-in";
         options.LogoutPath = "/log-out";
-        options.ExpireTimeSpan = TimeSpan.FromSeconds(5);
-        options.SlidingExpiration = false;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+        options.SlidingExpiration = true;
     });
 builder.Services.AddAuthorization(options =>
 {

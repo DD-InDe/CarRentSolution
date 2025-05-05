@@ -1,5 +1,4 @@
 ﻿using CarRentSolution.Entity;
-using CarRentSolution.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +13,10 @@ public partial class CreateAuto : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        if(!AuthService.IsAuthorized) Navigation.NavigateTo("/");
         if(_isLoaded) return;
 
-        _models = await Db.Context.Models
+        _models = await Db.Models
+            
             .Include(c=>c.Brand)
             .ToListAsync();
         _auto = new();
@@ -28,8 +27,8 @@ public partial class CreateAuto : ComponentBase
     {
         try
         {
-            await Db.Context.Autos.AddAsync(_auto);
-            if (await Db.Context.SaveChangesAsync() == 1)
+            await Db.Autos.AddAsync(_auto);
+            if (await Db.SaveChangesAsync() == 1)
             {
                 Navigation.NavigateTo("/cars");
             }

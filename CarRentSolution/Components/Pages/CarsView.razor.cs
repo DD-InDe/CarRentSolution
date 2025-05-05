@@ -1,5 +1,4 @@
 ﻿using CarRentSolution.Entity;
-using CarRentSolution.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,9 +25,9 @@ public partial class CarsView : ComponentBase
     {
         if (isLoaded) return;
 
-        _brands = await Db.Context.Brands.ToListAsync();
+        _brands = await Db.Brands.ToListAsync();
         _autos = await Db
-            .Context.Autos
+            .Autos
             .Include(c => c.Model)
             .Include(c => c.Model.Brand)
             .Include(c => c.AutoPhotos)
@@ -41,7 +40,7 @@ public partial class CarsView : ComponentBase
     {
         _autos.Clear();
         List<Auto> autos = await Db
-            .Context.Autos
+            .Autos
             .Include(c => c.Model)
             .Include(c => c.Model.Brand)
             .Include(c => c.AutoPhotos)
@@ -99,13 +98,12 @@ public partial class CarsView : ComponentBase
     private void SelectAuto(Auto auto)
     {
         _selectedAuto = auto;
-        if (!AuthService.IsAuthorized)
-            Order = new()
-            {
-                AutoId = _selectedAuto.Vin,
-                DateStartRent = DateOnly.FromDateTime(DateTime.Today),
-                DateEndRent = DateOnly.FromDateTime(DateTime.Today)
-            };
+        Order = new()
+        {
+            AutoId = _selectedAuto.Vin,
+            DateStartRent = DateOnly.FromDateTime(DateTime.Today),
+            DateEndRent = DateOnly.FromDateTime(DateTime.Today)
+        };
     }
 
     private async Task CreateOrder()
@@ -121,13 +119,21 @@ public partial class CarsView : ComponentBase
                 Order.ClientMiddleName = name[2];
 
             Order.DateCreated = DateOnly.FromDateTime(DateTime.Today);
-            await Db.Context.Orders.AddAsync(Order);
-            await Db.Context.SaveChangesAsync();
+            await Db.Orders.AddAsync(Order);
+
+            await Db.OrderHistories.AddAsync(new()
+            {
+                Time = TimeOnly.FromDateTime(DateTime.Now),
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                StatusId = 1,
+                Order = Order
+            });
+
+            await Db.SaveChangesAsync();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return;
         }
     }
 }

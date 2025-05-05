@@ -1,5 +1,4 @@
 ﻿using CarRentSolution.Entity;
-using CarRentSolution.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,13 +20,12 @@ public partial class OrderView : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        if (!AuthService.IsAuthorized) Navigation.NavigateTo("/");
         if (isLoaded) return;
 
-        _orderStatusList = await Db.Context.OrderStatuses.ToListAsync();
-        _orders = await Db.Context.Orders.ToListAsync();
+        _orderStatusList = await Db.OrderStatuses.ToListAsync();
+        _orders = await Db.Orders.ToListAsync();
         _autos = await Db
-            .Context.Autos.Include(c => c.Model)
+            .Autos.Include(c => c.Model)
             .Include(c => c.Model.Brand)
             .ToListAsync();
         _totalCount = _orders.Count;
@@ -37,7 +35,7 @@ public partial class OrderView : ComponentBase
     private async Task LoadOrders()
     {
         _orders = await Db
-            .Context.Orders.Where(c =>
+            .Orders.Where(c =>
                 c
                     .ClientLastName.ToLower()
                     .Contains(search.ToLower()) ||

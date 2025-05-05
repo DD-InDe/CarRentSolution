@@ -81,16 +81,77 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    @if (_selectedAuto.AutoPhotos.Count != 0)
-                    {
-                        <img class="modal-img" src="data:image/jpeg;base64,@_selectedAuto.AutoPhotos.First().Photo"/>
-                    }
-                    <p>Цена: @_selectedAuto.RentPrice рублей (сутки)</p>
+                <div
+                    class="modal-body"
+                    style="display: grid; grid-template-columns: 1fr auto">
                     <div>
-                        <label>Цвет:</label>
-                        <div class="color-indicator" style="background-color: @_selectedAuto.Color"></div>
+                        @if (_selectedAuto.AutoPhotos.Count != 0)
+                        {
+                            <img
+                                class="modal-img"
+                                src="data:image/jpeg;base64,@_selectedAuto.AutoPhotos.First().Photo"/>
+                        }
+                        <p>Цена: @_selectedAuto.RentPrice рублей (сутки)</p>
+                        <div>
+                            <label>Цвет:</label>
+                            <div
+                                class="color-indicator"
+                                style="background-color: @_selectedAuto.Color"></div>
+                        </div>
                     </div>
+                    <AuthorizeView>
+                        <NotAuthorized>
+                            <form
+                                style="padding: 15px; display: flex; flex-direction: column; gap: 10px; width: 20vw"
+                                name="order-form"
+                                @onsubmit="CreateOrder">
+                                <label
+                                    for="mname"
+                                    class="place">Ваше ФИО:</label>
+                                <input
+                                    name="mname"
+                                    @bind="Order.ClientFullName"
+                                    placeholder="Ваше фио"
+                                    class="form-control"/>
+                                <label
+                                    for="phone"
+                                    class="place">Ваш телефон:</label>
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="text"
+                                    maxlength="17"
+                                    required
+                                    @bind="Order.ClientPhone"
+                                    placeholder="Ваш номер"
+                                    class="form-control"/>
+                                <label
+                                    for="start"
+                                    class="place">Аренда с:</label>
+                                <input
+                                    name="start"
+                                    required
+                                    @bind="Order.DateStartRent"
+                                    type="date"
+                                    class="form-control"
+                                    placeholder="Аренда с"/>
+                                <label
+                                    for="end"
+                                    class="place">Аренда до:</label>
+                                <input
+                                    name="end"
+                                    required
+                                    @bind="Order.DateEndRent"
+                                    type="date"
+                                    class="form-control"
+                                    placeholder="Аренда по"/>
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary">Забронировать
+                                </button>
+                            </form>
+                        </NotAuthorized>
+                    </AuthorizeView>
                 </div>
                 <AuthorizeView>
                     <Authorized>
@@ -99,32 +160,6 @@
                             @onclick="() => ToEdit(_selectedAuto.Vin)">Редактировать
                         </button>
                     </Authorized>
-                    <NotAuthorized>
-                        <form
-                            style="padding: 15px; display: flex; flex-direction: column; gap: 10px;"
-                            name="order-form"
-                            @onsubmit="CreateOrder">
-                            <label for="mname" class="place">Ваше ФИО:</label>
-                            <input
-                                name="mname" @bind="Order.ClientFullName" placeholder="Ваше фио"
-                                class="form-control"/>
-                            <label for="phone" class="place">Ваш телефон:</label>
-                            <input
-                                id="phone" name="phone" type="text" maxlength="17" required
-                                @bind="Order.ClientPhone"
-                                placeholder="Ваш номер"
-                                class="form-control"/>
-                            <label for="start" class="place">Аренда с:</label>
-                            <input
-                                name="start" required @bind="Order.DateStartRent" type="date" class="form-control"
-                                placeholder="Аренда с"/>
-                            <label for="end" class="place">Аренда до:</label>
-                            <input
-                                name="end" required @bind="Order.DateEndRent" type="date" class="form-control"
-                                placeholder="Аренда по"/>
-                            <button type="submit" class="btn btn-primary">Забронировать</button>
-                        </form>
-                    </NotAuthorized>
                 </AuthorizeView>
                 <div class="modal-footer">
                     <div>

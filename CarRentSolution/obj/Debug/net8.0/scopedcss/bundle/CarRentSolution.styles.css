@@ -189,7 +189,9 @@
 }
 /* _content/CarRentSolution/Components/Pages/CreateAuto.razor.rz.scp.css */
 .form-container[b-g67g8l30g1] {
-    max-width: 600px;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
@@ -255,9 +257,11 @@
 }
 /* _content/CarRentSolution/Components/Pages/OrderInfo.razor.rz.scp.css */
 .order-details[b-c37ip3y6lk] {
-    max-width: 700px;
+    max-width: 70vw;
     margin: 30px auto;
     padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     border-radius: 10px;
     background-color: #f4f4f9;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
@@ -362,7 +366,9 @@ tr:hover[b-c37ip3y6lk] {
 /* _content/CarRentSolution/Components/Pages/OrderView.razor.rz.scp.css */
 /* _content/CarRentSolution/Components/Pages/UpdateAuto.razor.rz.scp.css */
 .form-container[b-vc22ibq5aj] {
-    max-width: 600px;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;

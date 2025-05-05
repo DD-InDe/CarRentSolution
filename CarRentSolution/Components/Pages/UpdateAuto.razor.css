@@ -1,5 +1,7 @@
 ﻿.form-container {
-    max-width: 600px;
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;

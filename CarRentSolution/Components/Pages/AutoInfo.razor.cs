@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarRentSolution.Components.Pages;
 
-public partial class UpdateAuto : ComponentBase
+public partial class AutoInfo : ComponentBase
 {
     [Parameter] public string Vin { get; set; }
+    [Parameter] public bool IsView { get; set; }
 
     private Auto _auto { get; set; }
     private List<Model> _models;
@@ -27,7 +28,6 @@ public partial class UpdateAuto : ComponentBase
             .Include(c => c.Brand)
             .ToListAsync();
 
-        Console.WriteLine(_auto.Color);
         _isLoaded = true;
     }
 
@@ -47,4 +47,7 @@ public partial class UpdateAuto : ComponentBase
             message = "Произошла ошибка";
         }
     }
+    
+    private void OpenView()=> Navigation.NavigateTo($"update-auto/{Vin}/true");
+    private void OpenEdit()=> Navigation.NavigateTo($"update-auto/{Vin}/false");
 }

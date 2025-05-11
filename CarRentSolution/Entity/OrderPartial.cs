@@ -5,39 +5,30 @@ namespace CarRentSolution.Entity;
 
 public partial class Order
 {
-    [NotMapped] public string? ClientFullName { get; set; }
-    [NotMapped]
-    public string? ClientPreviewPhone
+    [NotMapped] public string? ClientFullName { get; set; } = "";
+
+    public string GetColor()
     {
-        get { return FormatPhoneNumber(ClientPhone); }
-        set
+        string color = "#1b6ec2";
+        if (OrderHistories.Count > 0)
         {
-            // Удаляем все символы, кроме цифр
-            string phoneNumber = new string((value ?? "").Where(char.IsDigit).ToArray());
-
-            // Форматируем номер
-            if (phoneNumber.Length > 10)
-            {
-                phoneNumber = phoneNumber.Substring(0, 10);
-            }
-            string formattedPhoneNumber = Regex.Replace(phoneNumber, @"(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})", "+7($2)$3-$4-$5");
-
-            // Обновляем значение свойства
-            ClientPhone = formattedPhoneNumber;
+            color = OrderHistories.Last()
+                    .StatusId switch
+                {
+                    1 => "#1b6ec2",
+                    2 => "#decc54",
+                    3 => "#de5454",
+                    4 => "gray",
+                    5 => "#79de54",
+                };
         }
+
+        return color;
     }
 
-    private string FormatPhoneNumber(string? phoneNumber)
+    public string GetStatus()
     {
-        // Удаляем все символы, кроме цифр
-        string digits = new string((phoneNumber ?? "").Where(char.IsDigit).ToArray());
-
-        // Форматируем номер
-        if (digits.Length > 10)
-        {
-            digits = digits.Substring(0, 10);
-        }
-        return Regex.Replace(digits, @"(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})", "+7($2)$3-$4-$5");
+        return OrderHistories.Last()
+            .Status.Name;
     }
-
 }

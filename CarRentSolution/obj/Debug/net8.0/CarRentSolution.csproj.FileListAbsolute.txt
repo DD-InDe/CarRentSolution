@@ -109,7 +109,6 @@ C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\ne
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\CarsView.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\LogIn.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\CreateAuto.razor.rz.scp.css
-C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\UpdateAuto.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\CarRentSolution.sourcelink.json
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\OrderView.razor.rz.scp.css
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\OrderInfo.razor.rz.scp.css
@@ -121,3 +120,4 @@ C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\bin\Debug\ne
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\alena\RiderProjects\Diplom\CarRentSolution\CarRentSolution\obj\Debug\net8.0\scopedcss\Components\Pages\AutoInfo.razor.rz.scp.css

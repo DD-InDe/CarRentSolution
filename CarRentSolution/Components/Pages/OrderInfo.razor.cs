@@ -115,6 +115,8 @@ public partial class OrderInfo : ComponentBase
 
     private async Task CreateHistoryRow(long statusId)
     {
+        if (Db.OrderHistories.FirstOrDefault(c => c.StatusId == statusId && c.OrderId == Id) != null) return;
+
         OrderHistory orderHistory = new()
         {
             OrderId = _order.Id,
@@ -125,5 +127,7 @@ public partial class OrderInfo : ComponentBase
         };
         await Db.OrderHistories.AddAsync(orderHistory);
         await Db.SaveChangesAsync();
+
+        Navigation.NavigateTo($"order/{Id}", true);
     }
 }

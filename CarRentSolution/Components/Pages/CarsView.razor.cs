@@ -1,4 +1,6 @@
-﻿using CarRentSolution.Entity;
+﻿using System.Drawing;
+using CarRentSolution.Entity;
+using CarRentSolution.PageModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,10 @@ public partial class CarsView : ComponentBase
     private bool IsFirstAuto => _selectedIndex == 0;
     private bool IsLastAuto => _selectedIndex == _autos.Count - 1;
     private int _totalCount = 0;
+
+    private bool _canCreateOrder = true;
+
+    private PageMessageModel _formMessageModel;
 
     private Order Order { get; set; }
 
@@ -74,6 +80,9 @@ public partial class CarsView : ComponentBase
         if (!IsFirstAuto)
         {
             _selectedAuto = _autos[_selectedIndex - 1];
+            _canCreateOrder = true;
+            _formMessageModel.Clear();
+            ClearUpOrder();
         }
     }
 
@@ -82,12 +91,15 @@ public partial class CarsView : ComponentBase
         if (!IsLastAuto)
         {
             _selectedAuto = _autos[_selectedIndex + 1];
+            _canCreateOrder = true;
+            _formMessageModel.Clear();
+            ClearUpOrder();
         }
     }
 
     private void ToEdit(String vin)
     {
-        Navigation.NavigateTo($"/update-auto/{vin}");
+        Navigation.NavigateTo($"/update-auto/{vin}/true");
     }
 
     private void ToCreate()
@@ -98,12 +110,19 @@ public partial class CarsView : ComponentBase
     private void SelectAuto(Auto auto)
     {
         _selectedAuto = auto;
+        ClearUpOrder();
+        _formMessageModel = new();
+    }
+
+    private void ClearUpOrder()
+    {
         Order = new()
         {
             AutoId = _selectedAuto.Vin,
             DateStartRent = DateOnly.FromDateTime(DateTime.Today),
             DateEndRent = DateOnly.FromDateTime(DateTime.Today)
         };
+        _canCreateOrder = true;
     }
 
     private async Task CreateOrder()
@@ -111,7 +130,18 @@ public partial class CarsView : ComponentBase
         try
         {
             string[] name = Order.ClientFullName.Split(' ');
-            if (name.Length < 2) return;
+            if (name.Length < 2 || String.IsNullOrEmpty(Order.ClientFullName))
+            {
+                _formMessageModel.Change("Фамилия и Имя обязательны для заполнения", MessageType.Error);
+                return;
+            }
+
+            if (Order.DateStartRent >= Order.DateEndRent)
+            {
+                _formMessageModel.Change("Начало аренды не может быть раньше или равна окончанию", MessageType.Error);
+                return;
+            }
+
             Order.ClientLastName = name[0];
             Order.ClientFirstName = name[1];
 
@@ -130,6 +160,10 @@ public partial class CarsView : ComponentBase
             });
 
             await Db.SaveChangesAsync();
+
+            _formMessageModel.Change("Заявка создана", MessageType.Ok);
+
+            _canCreateOrder = false;
         }
         catch (Exception e)
         {

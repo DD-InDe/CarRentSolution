@@ -23,7 +23,9 @@ public partial class OrderView : ComponentBase
         if (isLoaded) return;
 
         _orderStatusList = await Db.OrderStatuses.ToListAsync();
-        _orders = await Db.Orders.ToListAsync();
+        _orders = await Db
+            .Orders.Include(c => c.OrderHistories)
+            .ToListAsync();
         _autos = await Db
             .Autos.Include(c => c.Model)
             .Include(c => c.Model.Brand)
@@ -35,7 +37,9 @@ public partial class OrderView : ComponentBase
     private async Task LoadOrders()
     {
         _orders = await Db
-            .Orders.Where(c =>
+            .Orders
+            .Include(c => c.OrderHistories)
+            .Where(c =>
                 c
                     .ClientLastName.ToLower()
                     .Contains(search.ToLower()) ||

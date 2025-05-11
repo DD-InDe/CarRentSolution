@@ -1,4 +1,5 @@
 .page {
+    background: #dfdfdf;
     display: grid;
     grid-template-rows: auto 1fr;
     overflow: hidden; /* Убирает прокрутку на уровне всей страницы */
@@ -45,11 +46,16 @@
 .nav-button.active {
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.3); /* Фон для активной ссылки */
-    color: #1b6ec2; /* Цвет текста для активной ссылки */
+    color: #4a3739; /* Цвет текста для активной ссылки */
 }
 
 .content {
-    overflow: auto;
+    margin: auto;
+    border-radius: 5px;
+    background: whitesmoke;
+    width: 90vw;
+    height: 90vh;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    overflow: hidden;
     flex: 1;
-    background-color: #f9f9f9; /* Цвет фона контента */
 }

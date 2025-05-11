@@ -1,5 +1,6 @@
 using CarRentSolution.Components;
 using CarRentSolution.Entity;
+using CarRentSolution.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);

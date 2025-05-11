@@ -1,12 +1,15 @@
 ﻿.form-container {
     width: 70vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .form-group {

@@ -2,16 +2,10 @@
     max-width: 70vw;
     margin: 30px auto;
     padding: 20px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
     border-radius: 10px;
     background-color: #f4f4f9;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
-}
-
-.order-details:hover {
-    transform: translateY(-5px);
 }
 
 .order-title {

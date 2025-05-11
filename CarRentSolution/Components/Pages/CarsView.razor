@@ -5,10 +5,8 @@
 
 <PageTitle>Автопарк</PageTitle>
 
-<div class="container my-2">
-    <div class="row">
-        <h3>Автопарк</h3>
-    </div>
+<div class="page-container">
+    <h3>Автопарк</h3>
     @if (isLoaded)
     {
         <div class="row mb-4">
@@ -25,7 +23,7 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <select class="form-control" @bind="brandId">
-                        <option value="0" selected>Все</option>
+                        <option value="0" selected>Все марки</option>
                         @foreach (var item in _brands)
                         {
                             <option value="@item.Id">@item.Name</option>
@@ -47,22 +45,23 @@
             </AuthorizeView>
         </div>
 
-        <div class="row cars-container">
+        <div class="cars-container">
             @foreach (Auto auto in _autos)
             {
-                <div class="col-md-4 mb-4" @onclick="() => SelectAuto(auto)">
-                    <div class="card h-100">
-                        @if (auto.AutoPhotos.Count != 0)
-                        {
-                            <img
-                                class="card-img-top" src="data:image/jpeg;base64,@auto.AutoPhotos.First().Photo"
-                                alt="@auto.Model.Brand.Name @auto.Model.Name">
-                        }
-                        <div class="card-body">
+                <div class="card" @onclick="() => SelectAuto(auto)">
+                    @if (auto.AutoPhotos.Count != 0)
+                    {
+                        <img
+                            class="card-img-top" src="data:image/jpeg;base64,@auto.AutoPhotos.First().Photo"
+                            alt="@auto.Model.Brand.Name @auto.Model.Name">
+                    }
+                    <div class="card-body">
+                        <div style="border-right: white solid 1px">
                             <h5 class="card-title">@auto.Model.Brand.Name @auto.Model.Name</h5>
-                            <p class="card-text">Цена: @auto.RentPrice</p>
-                            <div class="color-indicator" style="background-color: @auto.Color;"></div>
                         </div>
+                        <p
+                            class="card-text"
+                            style="margin-left: 15%">@auto.RentPrice рублей</p>
                     </div>
                 </div>
             }
@@ -110,6 +109,7 @@
                                     class="place">Ваше ФИО:</label>
                                 <input
                                     name="mname"
+                                    required
                                     @bind="Order.ClientFullName"
                                     placeholder="Ваше фио"
                                     class="form-control"/>
@@ -145,10 +145,19 @@
                                     type="date"
                                     class="form-control"
                                     placeholder="Аренда по"/>
-                                <button
-                                    type="submit"
-                                    class="btn btn-primary">Забронировать
-                                </button>
+
+                                @if (_formMessageModel != null)
+                                {
+                                    <label
+                                        style="color: @_formMessageModel.Color">@_formMessageModel.Message</label>
+                                }
+                                @if (_canCreateOrder)
+                                {
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary">Забронировать
+                                    </button>
+                                }
                             </form>
                         </NotAuthorized>
                     </AuthorizeView>
@@ -157,7 +166,7 @@
                     <Authorized>
                         <button
                             class="btn btn-primary"
-                            @onclick="() => ToEdit(_selectedAuto.Vin)">Редактировать
+                            @onclick="() => ToEdit(_selectedAuto.Vin)">Информация
                         </button>
                     </Authorized>
                 </AuthorizeView>

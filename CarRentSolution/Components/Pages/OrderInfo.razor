@@ -26,7 +26,8 @@
                 <h4 class="card-title">Информация об автомобиле</h4>
                 <p><strong>Марка:</strong> @_order.Auto.Model.Brand.Name</p>
                 <p><strong>Модель:</strong> @_order.Auto.Model.Name (@_order.Auto.Year)</p>
-                <p><strong>VIN номер автомобиля:</strong> @_order.AutoId</p>
+                <p><strong>VIN номер автомобиля:</strong> <a href="update-auto/@_order.AutoId/true">@_order.AutoId</a>
+                </p>
             </div>
 
             <div class="order-card">
@@ -220,33 +221,42 @@
         </div>
 
         <div style="margin: 15px 10px">
-            <h4 class="card-title">История заявки</h4>
-            <table>
-                <tr>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Статус</th>
-                    <th>Сотрудник</th>
-                </tr>
-                @foreach (var item in _histories)
-                {
+            <div class="order-card">
+                <h4 class="card-title">Детали заявки</h4>
+                <p><strong>Дата создания:</strong> @_order.DateCreated</p>
+                <p><strong>Срок аренды:</strong> @_order.DateStartRent - @_order.DateEndRent (@_days дней)</p>
+                <p><strong>Стоимость:</strong> @_price руб</p>
+            </div>
+
+            <div class="order-card">
+                <h4 class="card-title">История заявки</h4>
+                <table>
                     <tr>
-                        <td>@item.Date</td>
-                        <td>@item.Time</td>
-                        <td>@item.Status.Name</td>
-                        <td>
-                            @if (item.Employee != null)
-                            {
-                                <label>@item.Employee.LastName @item.Employee.FirstName</label>
-                            }
-                            else
-                            {
-                                <label>Система</label>
-                            }
-                        </td>
+                        <th>Дата</th>
+                        <th>Время</th>
+                        <th>Статус</th>
+                        <th>Сотрудник</th>
                     </tr>
-                }
-            </table>
+                    @foreach (var item in _histories)
+                    {
+                        <tr>
+                            <td>@item.Date</td>
+                            <td>@item.Time</td>
+                            <td>@item.Status.Name</td>
+                            <td>
+                                @if (item.Employee != null)
+                                {
+                                    <label>@item.Employee.LastName @item.Employee.FirstName</label>
+                                }
+                                else
+                                {
+                                    <label>Система</label>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
         </div>
     </div>
 }

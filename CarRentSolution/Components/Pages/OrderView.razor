@@ -7,11 +7,9 @@
 
 <PageTitle>Заявки</PageTitle>
 
-<div class="container my-5">
+<div class="container my-2">
     <div class="row mb-4">
-        <div class="col-12">
-            <h3>Заявки</h3>
-        </div>
+        <h3>Заявки</h3>
     </div>
 
     @if (isLoaded)
@@ -30,7 +28,7 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <select class="form-control" @bind="statusId">
-                        <option value="0" selected>Все</option>
+                        <option value="0" selected>Все статусы</option>
                         @foreach (var item in _orderStatusList)
                         {
                             <option value="@item.Id">@item.Name</option>
@@ -46,7 +44,7 @@
             <div style="margin-top: 5px">
                 <div class="input-group">
                     <select class="form-control" @bind="autoId">
-                        <option value="Все" selected>Все</option>
+                        <option value="Все" selected>Все автомобили</option>
                         @foreach (var item in _autos)
                         {
                             <option value="@item.Vin">
@@ -63,22 +61,25 @@
             </div>
         </div>
 
-        <div class="row cars-container">
+        <div class="row order-container">
             @foreach (Order order in _orders)
             {
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">@order.DateCreated (@order.AutoId)</h5>
-                            <p class="card-text"><b>Клиент:</b>
-                                <br/> @order.ClientLastName @order.ClientFirstName @order.ClientMiddleName</p>
-                            <p class="card-text">
-                                <b>Номер телефона:</b> <br/>
-                                @order.ClientPreviewPhone
-                            </p>
-                            <div class="d-flex justify-content-end">
-                                <a href="order/@order.Id" class="btn btn-primary">Подробнее</a>
-                            </div>
+                <div class="card shadow">
+                    <div style="background: @order.GetColor(); width: 100%; color: white; text-align: center; padding: 5px">
+                        <label style="margin: auto">@order.GetStatus()</label>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@order.DateCreated (@order.AutoId)</h5>
+                        <p class="card-text"><b>Клиент:</b>
+                            <br/> @order.ClientLastName @order.ClientFirstName @order.ClientMiddleName</p>
+                        <p class="card-text">
+                            <b>Номер телефона:</b> <br/>
+                            @order.ClientPhone
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a
+                                href="order/@order.Id"
+                                class="btn btn-outline-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
@@ -86,9 +87,6 @@
         </div>
     }
 
-    <div class="row">
-        <div class="col-12 text-center">
-            <p style="color: #7f7f7f">Найдено @_orders.Count из @_totalCount заявок</p>
-        </div>
-    </div>
+    <p></p>
+    <p style="color: #7f7f7f; text-align: center; margin: 5px">Найдено @_orders.Count из @_totalCount заявок</p>
 </div>

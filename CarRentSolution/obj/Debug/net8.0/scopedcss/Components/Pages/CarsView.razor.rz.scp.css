@@ -6,6 +6,7 @@
 
 .card[b-6zgv3msn57] {
     border: none;
+    height: 37vh;
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     cursor: pointer;
@@ -17,11 +18,13 @@
 }
 
 .card-img-top[b-6zgv3msn57] {
-    height: 200px;
+    height: 30vh;
     object-fit: cover;
 }
 
 .card-body[b-6zgv3msn57] {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     padding: 1.25rem;
 }
 
@@ -45,11 +48,11 @@
 }
 
 .color-indicator[b-6zgv3msn57] {
-    width: 20px;
+    width: 80%;
     height: 20px;
-    border-radius: 50%;
     display: inline-block;
     margin-right: 0.5rem;
+    border: black 1px solid;
 }
 
 .modal[b-6zgv3msn57] {
@@ -127,6 +130,19 @@
 }
 
 .cars-container[b-6zgv3msn57] {
-    max-height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    max-height: 68vh;
     overflow-y: auto;
+}
+
+.card[b-6zgv3msn57]{
+    background-color: #1b6ec2;
+    color: white;
+}
+
+.card .btn-primary[b-6zgv3msn57]{
+    background-color: white;
+    color: #1b6ec2;
 }

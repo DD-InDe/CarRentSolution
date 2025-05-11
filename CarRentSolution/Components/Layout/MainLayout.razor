@@ -2,7 +2,7 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="top-nav">
+    <div class="top-nav" style="height: 5.5vh">
         <nav>
             <ul>
                 <li>
@@ -11,7 +11,17 @@
                 <li>
                     <a class="nav-button" href="/cars">Автомобили</a>
                 </li>
-                <AuthorizeView>
+                <AuthorizeView Policy="AdminOnly">
+                    <Authorized>
+                        <li>
+                            <a class="nav-button" href="/orders">Сотрудники</a>
+                        </li>
+                        <li>
+                            <a class="nav-button" href="/orders">Клиенты</a>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView Policy="StaffOnly">
                     <Authorized>
                         <li>
                             <a class="nav-button" href="/orders">Заявки</a>
@@ -30,7 +40,7 @@
         </nav>
     </div>
 
-        <main class="content">
-            @Body
-        </main>
+    <main class="content">
+        @Body
+    </main>
 </div>

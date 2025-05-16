@@ -39,31 +39,48 @@
             <AuthorizeView>
                 <Authorized>
                     <div class="col-md-6">
-                        <button class="btn btn-primary" style="margin-top: 5px" @onclick="ToCreate">Добавить</button>
+                        <a class="btn btn-primary" style="margin-top: 5px" href="auto">Добавить</a>
                     </div>
                 </Authorized>
             </AuthorizeView>
         </div>
 
         <div class="cars-container">
-            @foreach (Auto auto in _autos)
+            @if (_autos.Count == 0)
             {
-                <div class="card" @onclick="() => SelectAuto(auto)">
-                    @if (auto.AutoPhotos.Count != 0)
-                    {
-                        <img
-                            class="card-img-top" src="data:image/jpeg;base64,@auto.AutoPhotos.First().Photo"
-                            alt="@auto.Model.Brand.Name @auto.Model.Name">
-                    }
-                    <div class="card-body">
-                        <div style="border-right: white solid 1px">
-                            <h5 class="card-title">@auto.Model.Brand.Name @auto.Model.Name</h5>
+                <h5>Нет результатов</h5>
+            }
+            else
+            {
+                @foreach (Auto auto in _autos)
+                {
+                    <div
+                        class="card"
+                        @onclick="() => SelectAuto(auto)">
+                        @if (auto.Photo != null)
+                        {
+                            <img
+                                class="card-img-top"
+                                src="data:image/jpeg;base64,@auto.Photo"
+                                alt="@auto.Model.Brand.Name @auto.Model.Name">
+                        }
+                        else
+                        {
+                            <img
+                                class="card-img-top"
+                                src="empty.png"
+                                alt="@auto.Model.Brand.Name @auto.Model.Name">
+                        }
+                        <div class="card-body">
+                            <div style="border-right: white solid 1px">
+                                <h5 class="card-title">@auto.Model.Brand.Name @auto.Model.Name</h5>
+                            </div>
+                            <p
+                                class="card-text"
+                                style="margin-left: 15%">@auto.RentPrice рублей</p>
                         </div>
-                        <p
-                            class="card-text"
-                            style="margin-left: 15%">@auto.RentPrice рублей</p>
                     </div>
-                </div>
+                }
             }
         </div>
     }
@@ -84,11 +101,17 @@
                     class="modal-body"
                     style="display: grid; grid-template-columns: 1fr auto">
                     <div>
-                        @if (_selectedAuto.AutoPhotos.Count != 0)
+                        @if (_selectedAuto.Photo != null)
                         {
                             <img
                                 class="modal-img"
-                                src="data:image/jpeg;base64,@_selectedAuto.AutoPhotos.First().Photo"/>
+                                src="data:image/jpeg;base64,@_selectedAuto.Photo"/>
+                        }
+                        else
+                        {
+                            <img
+                                class="card-img-top"
+                                src="empty.png">
                         }
                         <p>Цена: @_selectedAuto.RentPrice рублей (сутки)</p>
                         <div>
@@ -164,10 +187,9 @@
                 </div>
                 <AuthorizeView>
                     <Authorized>
-                        <button
-                            class="btn btn-primary"
-                            @onclick="() => ToEdit(_selectedAuto.Vin)">Информация
-                        </button>
+                        <a class="btn btn-primary"
+                           href="auto/@_selectedAuto.Vin/true">Информация
+                        </a>
                     </Authorized>
                 </AuthorizeView>
                 <div class="modal-footer">

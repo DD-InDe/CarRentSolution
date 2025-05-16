@@ -1,0 +1,182 @@
+﻿@page "/rent/order={OrderId:long}"
+@page "/rent"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@rendermode InteractiveServer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize(Policy = "StaffOnly")]
+
+<PageTitle>Информация об аренде</PageTitle>
+
+<div class="page-container">
+    <h3 class="mb-4 text-center">
+        @(_isView ? "Просмотр аренды" : "Добавление аренды")
+    </h3>
+
+    @if (_isLoaded)
+    {
+        <form name="rent-form" @onsubmit="SaveRent">
+            <div class="order-card">
+                <h4 class="card-title">Основная информация</h4>
+
+                <div
+                    style="margin: 5px"
+                    class="form-group">
+                    <label>Дата начала аренды</label>
+                    <input
+                        disabled="@_isView"
+                        type="date"
+                        class="form-control"
+                        required
+                        maxlength="17"
+                        @bind="_rent.DateStart"/>
+                </div>
+                <div
+                    style="margin: 5px"
+                    class="form-group">
+                    <label>Дата окончания аренды</label>
+                    <input
+                        disabled="@_isView"
+                        type="date"
+                        class="form-control"
+                        required
+                        maxlength="17"
+                        @bind="_rent.DateEnd"/>
+                </div>
+                <div
+                    style="margin: 5px"
+                    class="form-group">
+                    <label>Пени (%)</label>
+                    <input
+                        disabled="@_isView"
+                        type="number"
+                        max="100"
+                        min="0"
+                        pattern="^(0|[1-9][0-9]?)$|^100$"
+                        class="form-control"
+                        required
+                        oninput="this.value = Math.max(0, Math.min(100, this.value))"
+                        @bind="_rent.Penalties"/>
+                </div>
+                <div
+                    style="margin: 5px"
+                    class="form-group">
+                    <label>Тип ремонта</label>
+                    <select
+                        required
+                        @bind="_rent.RepairConditionId"
+                        disabled="@_isView"
+                        class="form-control">
+                        @foreach (var repair in _repairConditions)
+                        {
+                            <option
+                                value="@repair.Id">@repair.Name (@repair.Description)
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px">
+                <div class="order-card">
+                    <h4 class="card-title">Информация об арендаторе</h4>
+                    <div
+                        style="margin: 5px"
+                        class="form-group">
+                        <label>Арендатор</label>
+                        <div style="display: flex; flex-direction: row">
+                            <select
+                                required
+                                @bind="_rent.TenantId"
+                                disabled="@_isView"
+                                class="form-control">
+                                @foreach (var tenant in _tenants)
+                                {
+                                    <option
+                                        value="@tenant.Id">@tenant.LastName @tenant.FirstName @tenant.MiddleName (@tenant.Phone)
+                                    </option>
+                                }
+                            </select>
+                            @if (_rent.TenantId != 0)
+                            {
+                                <a
+                                    class="btn btn-outline-primary" target="_blank"
+                                    href="client/@_rent.TenantId/true">Инфо</a>
+                            }
+                        </div>
+
+                        @if (_rent.TenantId != 0)
+                        {
+                            @if (CheckNullDocuments(_rent.TenantId))
+                            {
+                                <label style="color: indianred; margin-top: 5px">У Клиента не загружены все
+                                    документы</label>
+                            }
+                        }
+
+                        @if (!_isView)
+                        {
+                            <div style="display: flex; flex-direction: row">
+                                <a
+                                    class="btn btn-outline-primary" style="margin-top: 10px; margin-right: 10px"
+                                    href="client"
+                                    target="_blank">Добавить
+                                    нового клиента</a>
+                                <button
+                                    @onclick="UpdateListClient" class="btn btn-outline-secondary"
+                                    style="margin-top: 10px">
+                                    Обновить список
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="order-card">
+                    <h4 class="card-title">Информация об автомобиле</h4>
+                    <div
+                        style="margin: 5px"
+                        class="form-group">
+                        <label>Автомобиль</label>
+                        <div style="display: flex; flex-direction: row">
+                            <select
+                                @bind="_rent.AutoId"
+                                disabled="@_isView"
+                                class="form-control">
+                                <option disabled>Автомобиль</option>
+                                @foreach (var car in _cars)
+                                {
+                                    <option
+                                        value="@car.Vin">
+                                        <label>@car.Model.Brand.Name @car.Model.Name - @car.Vin</label>
+                                    </option>
+                                }
+                            </select>
+                            @if (_rent.AutoId != null)
+                            {
+                                <a
+                                    class="btn btn-outline-primary" target="_blank"
+                                    href="auto/@_rent.AutoId/true">Инфо</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <h4 class="card-title">Финальная стоимость: <span style="color: white; ">@GetPrice().Item1 рублей и пени в размере @_rent.Penalties%
+                        (@GetPrice().Item2 рублей)</span></h4>
+            </div>
+            @if (_rent.Id == 0)
+            {
+                <label style="color: @_message.Color">@_message.Message</label>
+                <button type="submit" class="btn btn-primary" style="width: 100%" @onclick="SaveRent">Сохранить</button>
+            }
+        </form>
+        @if (_rent.Id != 0)
+        {
+            <div class="order-card">
+                <h4 class="card-title">Договор</h4>
+                <button @onclick="DownloadFile" class="btn btn-primary" type="button">Скачать пустой договор</button>
+            </div>
+        }
+    }
+</div>

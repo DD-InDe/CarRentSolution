@@ -9,18 +9,6 @@
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\asphalt-texture_(2).jpg",
-      "PackagePath": "staticwebassets\\asphalt-texture_(2).jpg"
-    },
-    {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\bmw_fary_avtomobil_124112_1920x1080.jpg",
-      "PackagePath": "staticwebassets\\bmw_fary_avtomobil_124112_1920x1080.jpg"
-    },
-    {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\bmw_vid_szadi_fara_130025_1920x1080.jpg",
-      "PackagePath": "staticwebassets\\bmw_vid_szadi_fara_130025_1920x1080.jpg"
-    },
-    {
       "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
@@ -29,16 +17,16 @@
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\empty.png",
+      "PackagePath": "staticwebassets\\empty.png"
+    },
+    {
       "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
       "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\notification.js",
       "PackagePath": "staticwebassets\\scripts\\notification.js"
-    },
-    {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\toyota_gt86_vid_szadi_105093_1920x1080.jpg",
-      "PackagePath": "staticwebassets\\toyota_gt86_vid_szadi_105093_1920x1080.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CarRentSolution.Microsoft.AspNetCore.StaticWebAssets.props",

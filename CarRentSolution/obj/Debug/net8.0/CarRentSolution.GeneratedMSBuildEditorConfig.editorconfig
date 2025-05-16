@@ -38,21 +38,29 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Comp/OrderDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wXE9yZGVyRGlzcGxheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-648sbetfj9
+
 [C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-j985qzeck3
 
-[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/AutoInfo.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRvSW5mby5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-toh1svja63
+[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/CarInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYXJJbmZvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-2lz3buplmi
 
 [C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/CarsView.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYXJzVmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-6zgv3msn57
 
-[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/CreateAuto.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVBdXRvLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-g67g8l30g1
+[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/ClientInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDbGllbnRJbmZvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1tj9kobv6y
+
+[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/ClientView.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDbGllbnRWaWV3LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-sqchdo33mb
 
 [C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/LogIn.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dJbi5yYXpvcg==
@@ -65,3 +73,7 @@ build_metadata.AdditionalFiles.CssScope = b-c37ip3y6lk
 [C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/OrderView.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xPcmRlclZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-w7t75j883w
+
+[C:/Users/alena/RiderProjects/Diplom/CarRentSolution/CarRentSolution/Components/Pages/RentInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZW50SW5mby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ltueutw2qb

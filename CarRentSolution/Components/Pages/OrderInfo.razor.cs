@@ -15,13 +15,12 @@ public partial class OrderInfo : ComponentBase
 
     private List<OrderHistory> _histories;
 
-    private Rent? _rent;
     private Tenant? _tenant;
     private List<RepairCondition> _repairConditions;
 
     private long userId;
 
-    private int _availableActions; // 0 - ничего, 1 - отклонить/в работе, 2 - отменить/аренда
+    private int _availableActions; // 0 - ничего, 1 - отклонить/в работе, 2 - отменить/аренда, 3 - открыть аренду
     private string _message;
 
     protected override async Task OnInitializedAsync()
@@ -48,7 +47,8 @@ public partial class OrderInfo : ComponentBase
             {
                 1 => 1,
                 2 => 2,
-                3 or 4 or 5 => 0,
+                4 => 3,
+                3  or 5 => 0,
             };
 
         userId = Convert.ToInt64((await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.FindFirst("Id")
@@ -63,56 +63,22 @@ public partial class OrderInfo : ComponentBase
 
     private async Task CancelOrder()
     {
-        CreateHistoryRow(5);
+        await CreateHistoryRow(5);
         _message = "Заявка отменена";
     }
 
     private async Task AccessOrder()
     {
-        CreateHistoryRow(2);
+        await CreateHistoryRow(2);
         _message = "Заявка одобрена";
     }
 
     private async Task RejectOrder()
     {
-        CreateHistoryRow(3);
+        await CreateHistoryRow(3);
         _message = "Заявка отклонена";
     }
-
-    private async Task OpenCreateForm()
-    {
-        _tenant = await Db.Tenants.FirstOrDefaultAsync(c => c.Phone == _order!.ClientPhone) ?? new();
-        _repairConditions = await Db.RepairConditions.ToListAsync();
-
-        _rent = new()
-        {
-            AutoId = _order.AutoId,
-            EmployeeId = userId,
-            DateCreated = DateOnly.FromDateTime(DateTime.Today),
-            DateEnd = DateOnly.FromDateTime(DateTime.Today),
-            DateStart = DateOnly.FromDateTime(DateTime.Today)
-        };
-    }
-
-    private async Task CreateRent()
-    {
-        try
-        {
-            if (_tenant.Id == 0) await Db.Tenants.AddAsync(_tenant);
-            _rent.Tenant = _tenant;
-
-            await Db.Rents.AddAsync(_rent);
-            await Db.SaveChangesAsync();
-
-            _availableActions = 0;
-            _message = "Заявка закрыта";
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-    }
-
+    
     private async Task CreateHistoryRow(long statusId)
     {
         if (Db.OrderHistories.FirstOrDefault(c => c.StatusId == statusId && c.OrderId == Id) != null) return;

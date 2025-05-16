@@ -1,0 +1,16 @@
+﻿.order-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card{
+    padding: 0;
+}

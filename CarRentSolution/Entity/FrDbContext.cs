@@ -17,7 +17,7 @@ public partial class FrDbContext : DbContext
 
     public virtual DbSet<Auto> Autos { get; set; }
 
-    public virtual DbSet<AutoPhoto> AutoPhotos { get; set; }
+    public virtual DbSet<AutoStatus> AutoStatuses { get; set; }
 
     public virtual DbSet<Brand> Brands { get; set; }
 
@@ -88,35 +88,33 @@ public partial class FrDbContext : DbContext
                 .HasMaxLength(12)
                 .HasColumnName("passport");
             entity.Property(e => e.PassportDated).HasColumnName("passport_dated");
+            entity.Property(e => e.Photo).HasColumnName("photo");
             entity.Property(e => e.RentPrice)
                 .HasColumnType("money")
                 .HasColumnName("rent_price");
+            entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.Year).HasColumnName("year");
 
             entity.HasOne(d => d.Model).WithMany(p => p.Autos)
                 .HasForeignKey(d => d.ModelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("auto_model_id_fkey");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Autos)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("auto_status_id_fkey");
         });
 
-        modelBuilder.Entity<AutoPhoto>(entity =>
+        modelBuilder.Entity<AutoStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("auto_photo_pkey");
+            entity.HasKey(e => e.Id).HasName("auto_status_pkey");
 
-            entity.ToTable("auto_photo");
+            entity.ToTable("auto_status");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.AutoId)
-                .HasMaxLength(17)
-                .HasColumnName("auto_id");
-            entity.Property(e => e.Photo)
-                .HasColumnType("character varying")
-                .HasColumnName("photo");
-
-            entity.HasOne(d => d.Auto).WithMany(p => p.AutoPhotos)
-                .HasForeignKey(d => d.AutoId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("auto_photo_auto_id_fkey");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("name");
         });
 
         modelBuilder.Entity<Brand>(entity =>
@@ -249,11 +247,16 @@ public partial class FrDbContext : DbContext
             entity.Property(e => e.DateCreated).HasColumnName("date_created");
             entity.Property(e => e.DateEndRent).HasColumnName("date_end_rent");
             entity.Property(e => e.DateStartRent).HasColumnName("date_start_rent");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
 
             entity.HasOne(d => d.Auto).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.AutoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("order_auto_id_fkey");
+
+            entity.HasOne(d => d.OrderNavigation).WithMany(p => p.InverseOrderNavigation)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("order_order_id_fkey");
         });
 
         modelBuilder.Entity<OrderHistory>(entity =>
@@ -327,6 +330,7 @@ public partial class FrDbContext : DbContext
             entity.Property(e => e.FinishPrice)
                 .HasColumnType("money")
                 .HasColumnName("finish_price");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.Penalties)
                 .HasColumnType("money")
                 .HasColumnName("penalties");
@@ -342,6 +346,10 @@ public partial class FrDbContext : DbContext
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rent_employee_id_fkey");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Rents)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("rent_order_id_fkey");
 
             entity.HasOne(d => d.RepairCondition).WithMany(p => p.Rents)
                 .HasForeignKey(d => d.RepairConditionId)

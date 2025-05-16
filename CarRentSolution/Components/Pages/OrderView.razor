@@ -1,5 +1,6 @@
 ﻿@page "/orders"
 @using Microsoft.AspNetCore.Authorization
+@using CarRentSolution.Components.Comp
 
 @attribute [Authorize("StaffOnly")]
 
@@ -7,7 +8,7 @@
 
 <PageTitle>Заявки</PageTitle>
 
-<div class="container my-2">
+<div class="page-container">
     <div class="row mb-4">
         <h3>Заявки</h3>
     </div>
@@ -61,30 +62,7 @@
             </div>
         </div>
 
-        <div class="row order-container">
-            @foreach (Order order in _orders)
-            {
-                <div class="card shadow">
-                    <div style="background: @order.GetColor(); width: 100%; color: white; text-align: center; padding: 5px">
-                        <label style="margin: auto">@order.GetStatus()</label>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@order.DateCreated (@order.AutoId)</h5>
-                        <p class="card-text"><b>Клиент:</b>
-                            <br/> @order.ClientLastName @order.ClientFirstName @order.ClientMiddleName</p>
-                        <p class="card-text">
-                            <b>Номер телефона:</b> <br/>
-                            @order.ClientPhone
-                        </p>
-                        <div class="d-flex justify-content-end">
-                            <a
-                                href="order/@order.Id"
-                                class="btn btn-outline-primary">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+        <OrderDisplay Orders="@_orders"></OrderDisplay>
     }
 
     <p></p>

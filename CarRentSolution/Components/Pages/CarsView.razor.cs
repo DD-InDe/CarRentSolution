@@ -36,7 +36,6 @@ public partial class CarsView : ComponentBase
             .Autos
             .Include(c => c.Model)
             .Include(c => c.Model.Brand)
-            .Include(c => c.AutoPhotos)
             .ToListAsync();
         _totalCount = _autos.Count;
         isLoaded = true;
@@ -49,7 +48,6 @@ public partial class CarsView : ComponentBase
             .Autos
             .Include(c => c.Model)
             .Include(c => c.Model.Brand)
-            .Include(c => c.AutoPhotos)
             .ToListAsync();
 
         if (search != String.Empty)
@@ -95,16 +93,6 @@ public partial class CarsView : ComponentBase
             _formMessageModel.Clear();
             ClearUpOrder();
         }
-    }
-
-    private void ToEdit(String vin)
-    {
-        Navigation.NavigateTo($"/update-auto/{vin}/true");
-    }
-
-    private void ToCreate()
-    {
-        Navigation.NavigateTo($"/add-auto");
     }
 
     private void SelectAuto(Auto auto)

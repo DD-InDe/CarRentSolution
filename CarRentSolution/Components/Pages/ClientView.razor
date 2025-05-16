@@ -1,0 +1,75 @@
+﻿@page "/clients"
+@using Microsoft.AspNetCore.Authorization
+@rendermode InteractiveServer
+
+@attribute [Authorize("StaffOnly")]
+
+<PageTitle>Клиенты</PageTitle>
+
+<div class="page-container">
+    <h3>Клиенты</h3>
+    @if (_isLoaded)
+    {
+        <div class="row mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Поиск" @bind="_search"/>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" @onclick="LoadClients">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <a class="btn btn-primary" style="width: auto; margin: 10px" href="client">Добавить</a>
+        </div>
+
+        <div
+            class="row"
+            style="height: 68vh; overflow: auto">
+            @if (_clients.Count == 0)
+            {
+                <h5>Нет результатов</h5>
+            }
+            else
+            {
+                <table>
+                    <tr>
+                        <th style="padding: 0"></th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th>Телефон</th>
+                        <th>Адрес</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var client in _clients)
+                    {
+                        <tr>
+                            <td style="min-width: 0; padding: 0; margin: 0; text-align: center; font-size: 16pt">
+                                @if (client.TenantDocument == null ||
+                                     (client.TenantDocument != null && client.TenantDocument.Passport == null && client.TenantDocument.DriveLicense == null))
+                                {
+                                    <label>❗</label>
+                                }
+                                else
+                                {
+                                    <label>✅</label>
+                                }
+                            </td>
+                            <td>@client.LastName</td>
+                            <td>@client.FirstName</td>
+                            <td>@client.LastName</td>
+                            <td>@client.Phone</td>
+                            <td>@client.Address</td>
+                            <td>
+                                <a href="client/@client.Id/true" class="btn btn-outline-primary">Информация</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+
+        <p style="color: #7f7f7f; text-align: center; margin: 5px">Найдено @_clients.Count из @_totalCount клиентов</p>
+    }
+</div>

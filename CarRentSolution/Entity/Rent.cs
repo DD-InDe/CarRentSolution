@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CarRentSolution.Entity;
+﻿namespace CarRentSolution.Entity;
 
 public partial class Rent
 {
@@ -25,9 +22,13 @@ public partial class Rent
 
     public long TenantId { get; set; }
 
+    public long? OrderId { get; set; }
+
     public virtual Auto Auto { get; set; } = null!;
 
     public virtual Employee Employee { get; set; } = null!;
+
+    public virtual Order? Order { get; set; }
 
     public virtual RepairCondition RepairCondition { get; set; } = null!;
 

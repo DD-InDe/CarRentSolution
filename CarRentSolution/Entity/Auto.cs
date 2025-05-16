@@ -27,11 +27,15 @@ public partial class Auto
 
     public long ModelId { get; set; }
 
-    public virtual ICollection<AutoPhoto> AutoPhotos { get; set; } = new List<AutoPhoto>();
+    public long? StatusId { get; set; }
+
+    public byte[]? Photo { get; set; }
 
     public virtual Model Model { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<Rent> Rents { get; set; } = new List<Rent>();
+
+    public virtual AutoStatus? Status { get; set; }
 }

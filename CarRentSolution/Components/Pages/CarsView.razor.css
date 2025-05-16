@@ -133,7 +133,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
-    max-height: 68vh;
+    height: 68vh;
     overflow-y: auto;
 }
 

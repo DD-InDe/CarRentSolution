@@ -1,0 +1,216 @@
+﻿@page "/client"
+@page "/client/{FullName}/{Phone}"
+@page "/client/{Id:long}/{IsView:bool}"
+
+@rendermode InteractiveServer
+
+<PageTitle>Управление клиентом</PageTitle>
+
+<div class="page-container">
+    @if (_isLoaded)
+    {
+        @if (_tenant.Id == 0)
+        {
+            <h3>Добавление клиента</h3>
+        }
+
+        <div style="display: grid;grid-template-columns: 1fr 1fr; grid-gap: 10px">
+
+            <div class="order-card">
+                <h4 class="card-title">Персональные данные</h4>
+
+                <div class="form-group">
+                    <label for="lastname">Фамилия</label>
+                    <input
+                        disabled="@_isView"
+                        id="lastname"
+                        type="text"
+                        class="form-control"
+                        required
+                        @bind="_tenant.LastName"/>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Имя</label>
+                    <input
+                        disabled="@_isView"
+                        id="firstname"
+                        type="text"
+                        class="form-control"
+                        required
+                        @bind="_tenant.FirstName"/>
+                </div>
+                <div class="form-group">
+                    <label for="middlename">Отчество</label>
+                    <input
+                        disabled="@_isView"
+                        id="middlename"
+                        type="text"
+                        class="form-control"
+                        required
+                        @bind="_tenant.MiddleName"/>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input
+                        disabled="@_isView"
+                        id="phone"
+                        type="text"
+                        maxlength="20"
+                        class="form-control"
+                        required
+                        @bind="_tenant.Phone"/>
+                </div>
+                <div class="form-group">
+                    <label for="address">Адрес проживания</label>
+                    <input
+                        disabled="@_isView"
+                        id="address"
+                        type="text"
+                        class="form-control"
+                        required
+                        @bind="_tenant.Address"/>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <h4 class="card-title">Паспортные данные</h4>
+
+                <div class="form-group">
+                    <label for="serial">Серия паспорта</label>
+                    <input
+                        disabled="@_isView"
+                        id="serial"
+                        type="text"
+                        maxlength="4"
+                        class="form-control"
+                        required
+                        @bind="_tenant.PassportSerial"/>
+                </div>
+                <div class="form-group">
+                    <label for="number">Номер паспорта</label>
+                    <input
+                        disabled="@_isView"
+                        id="number"
+                        type="text"
+                        maxlength="6"
+                        class="form-control"
+                        required
+                        @bind="_tenant.PassportNumber"/>
+                </div>
+                <div class="form-group">
+                    <label for="dateissued">Дата выдачи</label>
+                    <input
+                        disabled="@_isView"
+                        id="dateissued"
+                        type="date"
+                        class="form-control"
+                        required
+                        @bind="_tenant.PassportDated"/>
+                </div>
+                <div class="form-group">
+                    <label for="issuedby">Кем выдан</label>
+                    <input
+                        disabled="@_isView"
+                        id="issuedby"
+                        type="text"
+                        class="form-control"
+                        required
+                        @bind="_tenant.PassportIssued"/>
+                </div>
+
+                @if (!_isView)
+                {
+                    <div class="form-group">
+                        <button
+                            type="button"
+                            @onclick="SaveClient"
+                            class="btn btn-primary"
+                            style="width: 100%; margin-top: 23px">Сохранить данные клиента
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <button
+                            type="button"
+                            @onclick="OpenEdit"
+                            class="btn btn-primary"
+                            style="width: 100%; margin-top: 23px">Редактировать данные клиента
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <div class="order-card">
+                <h4 class="card-title">Документы</h4>
+                <div style="display: flex; flex-direction: column">
+                    @if (!_isView)
+                    {
+                        <label>Скан паспорта</label>
+                        <InputFile
+                            class="form-control"
+                            OnChange="LoadPassport"
+                            accept=".pdf"/>
+                    }
+                    @if (_tenant.TenantDocument.Passport != null)
+                    {
+                        <button
+                            @onclick="() => DownloadFile(1)"
+                            style="margin-top: 10px"
+                            class="btn btn-outline-primary">Скачать паспорт
+                        </button>
+                    }
+                    else if(_isView)
+                    {
+                        <label style="color: indianred">Паспорт отсутствует</label>
+                    }
+                </div>
+
+                <div style="display: flex; flex-direction: column">
+                    @if (!_isView)
+                    {
+                        <label>Скан водительского удостоверения</label>
+                        <InputFile
+                            class="form-control"
+                            OnChange="LoadLicense"
+                            accept=".pdf"/>
+                    }
+                    @if (_tenant.TenantDocument.Passport != null)
+                    {
+                        <button
+                            @onclick="() => DownloadFile(2)"
+                            style="margin-top: 10px"
+                            class="btn btn-outline-primary">Скачать водительское удостоверение
+                        </button>
+                    }
+                    else if(_isView)
+                    {
+                        <label style="color: indianred">Водительское удостоверение отсутствует</label>
+                    }
+                </div>
+
+                @if (!_isView)
+                {
+                    <button @onclick="SaveFiles" class="btn btn-primary" style="width: 100%; margin-top: 23px">Сохранить
+                        документы
+                    </button>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    window.downloadFile = async (fileName, fileBytes) => {
+        const blob = new Blob([new Uint8Array(fileBytes)])
+        const url = URL.createObjectURL(blob)
+        const anchorElement = document.createElement('a')
+
+        anchorElement.href = url
+        anchorElement.download = fileName ?? ''
+        anchorElement.click()
+        anchorElement.remove()
+        URL.revokeObjectURL(url)
+    }
+</script>

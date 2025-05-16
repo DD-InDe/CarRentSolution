@@ -1,11 +1,5 @@
 ﻿.order-details {
-    max-width: 70vw;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f4f4f9;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    padding: 10px 20px;
 }
 
 .order-title {
@@ -30,7 +24,7 @@
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: bold;
-}
+}   
 
 .order-actions {
     text-align: center;

@@ -11,20 +11,13 @@
                 <li>
                     <a class="nav-button" href="/cars">Автомобили</a>
                 </li>
-                <AuthorizeView Policy="AdminOnly">
-                    <Authorized>
-                        <li>
-                            <a class="nav-button" href="/orders">Сотрудники</a>
-                        </li>
-                        <li>
-                            <a class="nav-button" href="/orders">Клиенты</a>
-                        </li>
-                    </Authorized>
-                </AuthorizeView>
                 <AuthorizeView Policy="StaffOnly">
                     <Authorized>
                         <li>
                             <a class="nav-button" href="/orders">Заявки</a>
+                        </li>
+                        <li>
+                            <a class="nav-button" href="/clients">Клиенты</a>
                         </li>
                         <li>
                             <a class="nav-button" href="/log-out">Выход</a>

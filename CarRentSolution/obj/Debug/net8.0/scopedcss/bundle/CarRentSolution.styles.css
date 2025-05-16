@@ -1,3 +1,20 @@
+/* _content/CarRentSolution/Components/Comp/OrderDisplay.razor.rz.scp.css */
+.order-container[b-648sbetfj9] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body[b-648sbetfj9] {
+    padding: 1.25rem;
+}
+
+.card[b-648sbetfj9]{
+    padding: 0;
+}
 /* _content/CarRentSolution/Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-j985qzeck3] {
     background: #dfdfdf;
@@ -60,8 +77,8 @@
     overflow: hidden;
     flex: 1;
 }
-/* _content/CarRentSolution/Components/Pages/AutoInfo.razor.rz.scp.css */
-.form-container[b-toh1svja63] {
+/* _content/CarRentSolution/Components/Pages/CarInfo.razor.rz.scp.css */
+.form-container[b-2lz3buplmi] {
     width: 70vw;
     margin: 0 auto;
     padding: 20px;
@@ -70,34 +87,34 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.form-div[b-toh1svja63]{
+.form-div[b-2lz3buplmi]{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.form-group[b-toh1svja63] {
+.form-group[b-2lz3buplmi] {
     margin-bottom: 20px;
 }
 
-.form-control[b-toh1svja63] {
+.form-control[b-2lz3buplmi] {
     border: 1px solid #ced4da;
     border-radius: 3px;
     padding: 10px 15px;
     font-size: 16px;
 }
 
-.form-control-color[b-toh1svja63] {
+.form-control-color[b-2lz3buplmi] {
     padding: 3px;
 }
 
-.btn-primary[b-toh1svja63] {
+.btn-primary[b-2lz3buplmi] {
     background-color: #1b6ec2;
     border-color: #1b6ec2;
     font-size: 16px;
     padding: 10px 20px;
 }
 
-.btn-primary:hover[b-toh1svja63] {
+.btn-primary:hover[b-2lz3buplmi] {
     background-color: #0056b3;
     border-color: #004a9b;
 }
@@ -237,7 +254,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
-    max-height: 68vh;
+    height: 68vh;
     overflow-y: auto;
 }
 
@@ -250,20 +267,99 @@
     background-color: white;
     color: #1b6ec2;
 }
-/* _content/CarRentSolution/Components/Pages/CreateAuto.razor.rz.scp.css */
-
-
-.form-div[b-g67g8l30g1]{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+/* _content/CarRentSolution/Components/Pages/ClientInfo.razor.rz.scp.css */
+.order-card[b-1tj9kobv6y] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
 }
 
-.form-group[b-g67g8l30g1] {
-    margin-bottom: 20px;
+.card-title[b-1tj9kobv6y] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.form-control-color[b-g67g8l30g1] {
-    padding: 3px;
+.custom-file-label.selected[b-1tj9kobv6y]::after {
+    content: "" !important;
+}
+/* _content/CarRentSolution/Components/Pages/ClientView.razor.rz.scp.css */
+.input-group[b-sqchdo33mb] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-sqchdo33mb] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-sqchdo33mb] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-sqchdo33mb] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-sqchdo33mb] {
+    font-size: 1.2rem;
+}
+
+table[b-sqchdo33mb] {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: auto;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+th[b-sqchdo33mb], td[b-sqchdo33mb] {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Синяя шапка */
+    color: white;
+}
+
+td[b-sqchdo33mb] {
+    min-width: 200px;
+    background-color: #f9f9f9; /* Светлый фон для ячеек */
+}
+
+tr:nth-child(even) td[b-sqchdo33mb] {
+    background-color: #eaeaea; /* Светло-серый фон для четных строк */
+}
+
+tr:hover td[b-sqchdo33mb] {
+    background-color: #d1e7ff; /* Цвет при наведении на строку */
+}
+
+.info-button[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Основной цвет */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px 20px; /* Отступы */
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+.info-button:hover[b-sqchdo33mb] {
+    background-color: #155a8a; /* Темнее при наведении */
 }
 /* _content/CarRentSolution/Components/Pages/LogIn.razor.rz.scp.css */
 .container[b-75smtxn952] {
@@ -297,13 +393,7 @@
 }
 /* _content/CarRentSolution/Components/Pages/OrderInfo.razor.rz.scp.css */
 .order-details[b-c37ip3y6lk] {
-    max-width: 70vw;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f4f4f9;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    padding: 10px 20px;
 }
 
 .order-title[b-c37ip3y6lk] {
@@ -328,7 +418,7 @@
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: bold;
-}
+}   
 
 .order-actions[b-c37ip3y6lk] {
     text-align: center;
@@ -413,4 +503,24 @@ tr:hover[b-c37ip3y6lk] {
 
 .card[b-w7t75j883w]{
     padding: 0;
+}
+/* _content/CarRentSolution/Components/Pages/RentInfo.razor.rz.scp.css */
+.order-card[b-ltueutw2qb] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
+}
+
+.card-title[b-ltueutw2qb] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.custom-file-label.selected[b-ltueutw2qb]::after {
+    content: "" !important;
 }

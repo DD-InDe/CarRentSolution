@@ -23,7 +23,15 @@ public partial class Order
 
     public string AutoId { get; set; } = null!;
 
+    public long? OrderId { get; set; }
+
     public virtual Auto Auto { get; set; } = null!;
 
+    public virtual ICollection<Order> InverseOrderNavigation { get; set; } = new List<Order>();
+
     public virtual ICollection<OrderHistory> OrderHistories { get; set; } = new List<OrderHistory>();
+
+    public virtual Order? OrderNavigation { get; set; }
+
+    public virtual ICollection<Rent> Rents { get; set; } = new List<Rent>();
 }

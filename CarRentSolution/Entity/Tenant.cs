@@ -25,6 +25,8 @@ public partial class Tenant
 
     public string Phone { get; set; } = null!;
 
+    public string? Email { get; set; }
+
     public virtual ICollection<Rent> Rents { get; set; } = new List<Rent>();
 
     public virtual TenantDocument? TenantDocument { get; set; }

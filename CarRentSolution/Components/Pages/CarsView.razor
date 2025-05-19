@@ -61,7 +61,7 @@
                         {
                             <img
                                 class="card-img-top"
-                                src="data:image/jpeg;base64,@auto.Photo"
+                                src="data:image/jpg;base64,@auto.Photo"
                                 alt="@auto.Model.Brand.Name @auto.Model.Name">
                         }
                         else
@@ -105,7 +105,7 @@
                         {
                             <img
                                 class="modal-img"
-                                src="data:image/jpeg;base64,@_selectedAuto.Photo"/>
+                                src="data:image/jpg;base64,@_selectedAuto.Photo"/>
                         }
                         else
                         {
@@ -114,12 +114,7 @@
                                 src="empty.png">
                         }
                         <p>Цена: @_selectedAuto.RentPrice рублей (сутки)</p>
-                        <div>
-                            <label>Цвет:</label>
-                            <div
-                                class="color-indicator"
-                                style="background-color: @_selectedAuto.Color"></div>
-                        </div>
+                        <p>Цвет: @_selectedAuto.Color</p>
                     </div>
                     <AuthorizeView>
                         <NotAuthorized>

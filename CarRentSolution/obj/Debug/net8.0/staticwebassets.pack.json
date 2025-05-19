@@ -25,8 +25,8 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\notification.js",
-      "PackagePath": "staticwebassets\\scripts\\notification.js"
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\download.js",
+      "PackagePath": "staticwebassets\\scripts\\download.js"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CarRentSolution.Microsoft.AspNetCore.StaticWebAssets.props",

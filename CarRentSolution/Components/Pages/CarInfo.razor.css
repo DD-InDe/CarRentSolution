@@ -1,40 +1,26 @@
-﻿.form-container {
-    width: 70vw;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+﻿.order-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
 }
 
-.form-div{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.card-title {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.custom-file-label.selected::after {
+    content: "" !important;
 }
 
-.form-control {
-    border: 1px solid #ced4da;
-    border-radius: 3px;
-    padding: 10px 15px;
-    font-size: 16px;
-}
-
-.form-control-color {
-    padding: 3px;
-}
-
-.btn-primary {
-    background-color: #1b6ec2;
-    border-color: #1b6ec2;
-    font-size: 16px;
-    padding: 10px 20px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004a9b;
+.img-car{
+    width: 100%;
+    max-height: 50vh;
+    object-fit: cover;
+    object-position: center;
 }

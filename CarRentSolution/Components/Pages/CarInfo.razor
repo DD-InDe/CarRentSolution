@@ -3,21 +3,42 @@
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
+
 <PageTitle>Информация об авто</PageTitle>
 @attribute [Authorize("StaffOnly")]
 
 <div class="page-container">
     @if (_isLoaded)
     {
-        <h3 class="mb-4 text-center">
+        <h3 class="mb-4">
             @(_isView ? "Просмотр авто" : "Редактирование авто")
         </h3>
-        <AuthorizeView Policy="AdminOnly">
-            <Authorized>
-                <div class="form-div">
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+        <div class="order-card">
+            <h4 class="card-title">Общие данные</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr;grid-gap: 10px">
+                <div>
+                    @if (_auto.Photo != null)
+                    {
+                        <img class="img-car" src="data:image/jpg;base64,@_auto.Photo"/>
+                    }
+                    else
+                    {
+                        <img class="img-car"
+                            src="empty.png"/>
+                    }
+                    @if (!_isView)
+                    {
+                        <div class="form-group">
+                            <label>Фото</label>
+                            <InputFile
+                                class="form-control"
+                                OnChange="LoadImg"
+                                accept=".jpg"/>
+                        </div>
+                    }
+                </div>
+                <div>
+                    <div class="form-group">
                         <label for="vin">VIN</label>
                         <input
                             disabled="@_isView"
@@ -28,9 +49,7 @@
                             @bind="_auto.Vin"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="year">Год</label>
                         <input
                             disabled="@_isView"
@@ -41,9 +60,7 @@
                             @bind="_auto.Year"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="engine">Двигатель</label>
                         <input
                             disabled="@_isView"
@@ -54,9 +71,7 @@
                             @bind="_auto.Engine"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="body">Кузов</label>
                         <input
                             disabled="@_isView"
@@ -67,56 +82,17 @@
                             @bind="_auto.Body"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="color">Цвет</label>
                         <input
                             disabled="@_isView"
-                            type="color"
-                            class="form-control form-control-color"
+                            type="text"
+                            class="form-control"
                             required
                             @bind="_auto.Color"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
-                        <label for="number">Гос номер</label>
-                        <input
-                            disabled="@_isView"
-                            type="text"
-                            class="form-control"
-                            @bind="_auto.GovNumber"/>
-                    </div>
-
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
-                        <label for="passport">Номер ПТС</label>
-                        <input
-                            disabled="@_isView"
-                            type="text"
-                            class="form-control"
-                            required
-                            @bind="_auto.Passport"/>
-                    </div>
-
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
-                        <label for="date">Дата выдачи</label>
-                        <input
-                            disabled="@_isView"
-                            type="date"
-                            class="form-control"
-                            required
-                            @bind="_auto.PassportDated"/>
-                    </div>
-
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="full_price">Полная стоимость</label>
                         <input
                             disabled="@_isView"
@@ -126,9 +102,7 @@
                             @bind="_auto.FullPrice"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="rent_price">Стоимость аренды (1 сутки)</label>
                         <input
                             disabled="@_isView"
@@ -138,9 +112,7 @@
                             @bind="_auto.RentPrice"/>
                     </div>
 
-                    <div
-                        style="margin: 5px"
-                        class="form-group">
+                    <div class="form-group">
                         <label for="model">Модель</label>
                         <select
                             @bind="_auto.ModelId"
@@ -153,45 +125,81 @@
                             }
                         </select>
                     </div>
-
-                    @if (!_isView)
-                    {
-                        <div
-                            style="margin: 5px"
-                            class="form-group">
-                            <label for="">Фото</label>
-                            <input
-                                disabled="@_isView"
-                                class="form-control"
-                                type="file"/>
-                        </div>
-                    }
                 </div>
+            </div>
+        </div>
+        <div class="order-card">
+            <h4 class="card-title">Данные ПТС</h4>
 
-                @if (!_isView)
-                {
-                    <label style="color: @_message.Color">@_message.Message</label>
-                    <button
-                        @onclick="Save"
-                        type="button"
-                        class="btn btn-primary"
-                        style="width: 99%; margin-left: 0.5%">Сохранить
-                    </button>
-                }
-            </Authorized>
-            <NotAuthorized>
-                <h5>У вас нет прав на редактирование</h5>
-            </NotAuthorized>
-        </AuthorizeView>
-        <AuthorizeView Policy="AdminOnly">
-            @if (_isView)
+            <div
+                class="form-group">
+                <label for="number">Гос номер</label>
+                <input
+                    disabled="@_isView"
+                    type="text"
+                    class="form-control"
+                    @bind="_auto.GovNumber"/>
+            </div>
+
+            <div
+                class="form-group">
+                <label for="passport">Номер ПТС</label>
+                <input
+                    disabled="@_isView"
+                    type="text"
+                    class="form-control"
+                    required
+                    @bind="_auto.Passport"/>
+            </div>
+
+            <div
+                class="form-group">
+                <label for="date">Дата выдачи</label>
+                <input
+                    disabled="@_isView"
+                    type="date"
+                    class="form-control"
+                    required
+                    @bind="_auto.PassportDated"/>
+            </div>
+
+            <div
+                class="form-group">
+                <label for="issued">Кем выдан</label>
+                <input
+                    disabled="@_isView"
+                    type="text"
+                    class="form-control"
+                    required
+                    @bind="_auto.PassportIssued"/>
+            </div>
+
+            @if (!_isView)
             {
-                <a
-                    class="btn btn-primary"
-                    style="margin: 5px; width: 100%"
-                    href="auto/@Vin/false">Редактировать</a>
+                <AuthorizeView Policy="AdminOnly">
+                    <label style="color: @_message.Color">@_message.Message</label>
+                    <div class="form-group">
+                        <button
+                            @onclick="Save"
+                            type="button"
+                            class="btn btn-primary"
+                            style="width: 100%; margin-top: 5px">Сохранить
+                        </button>
+                    </div>
+                </AuthorizeView>
             }
-        </AuthorizeView>
+
+            <AuthorizeView Policy="AdminOnly">
+                @if (_isView)
+                {
+                    <div class="form-group">
+                        <a
+                            class="btn btn-primary"
+                            style="width: 100%; margin-top: 5px"
+                            href="auto/@Vin/false">Редактировать</a></div>
+                }
+            </AuthorizeView>
+        </div>
     }
     else
     {

@@ -88,7 +88,12 @@ public partial class FrDbContext : DbContext
                 .HasMaxLength(12)
                 .HasColumnName("passport");
             entity.Property(e => e.PassportDated).HasColumnName("passport_dated");
-            entity.Property(e => e.Photo).HasColumnName("photo");
+            entity.Property(e => e.PassportIssued)
+                .HasMaxLength(100)
+                .HasColumnName("passport_issued");
+            entity.Property(e => e.Photo)
+                .HasColumnType("character varying")
+                .HasColumnName("photo");
             entity.Property(e => e.RentPrice)
                 .HasColumnType("money")
                 .HasColumnName("rent_price");
@@ -399,6 +404,9 @@ public partial class FrDbContext : DbContext
             entity.Property(e => e.Address)
                 .HasColumnType("character varying")
                 .HasColumnName("address");
+            entity.Property(e => e.Email)
+                .HasMaxLength(150)
+                .HasColumnName("email");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(100)
                 .HasColumnName("first_name");

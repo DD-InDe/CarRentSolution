@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GAdhm7/nISW7aUoc/TpZv3B+K6p66YVrF890G44E8XQ=",
+  "Hash": "IOWNLfLS3YO/yPSRqMhQ5YCMnccwwBFI2YSXgztGdYY=",
   "Source": "CarRentSolution",
   "BasePath": "_content/CarRentSolution",
   "Mode": "Default",
@@ -150,12 +150,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\notification.js",
+      "Identity": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\download.js",
       "SourceId": "CarRentSolution",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\",
       "BasePath": "_content/CarRentSolution",
-      "RelativePath": "scripts/notification.js",
+      "RelativePath": "scripts/download.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -166,7 +166,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\scripts\\notification.js"
+      "OriginalItemSpec": "wwwroot\\scripts\\download.js"
     }
   ]
 }

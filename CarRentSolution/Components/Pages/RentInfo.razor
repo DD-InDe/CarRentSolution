@@ -9,7 +9,7 @@
 <PageTitle>Информация об аренде</PageTitle>
 
 <div class="page-container">
-    <h3 class="mb-4 text-center">
+    <h3 class="mb-4">
         @(_isView ? "Просмотр аренды" : "Добавление аренды")
     </h3>
 
@@ -162,7 +162,7 @@
             </div>
 
             <div class="order-card">
-                <h4 class="card-title">Финальная стоимость: <span style="color: white; ">@GetPrice().Item1 рублей и пени в размере @_rent.Penalties%
+                <h4 class="card-title">Финальная стоимость: <span style="color: black; font-weight: normal">@GetPrice().Item1 рублей и пени в размере @_rent.Penalties%
                         (@GetPrice().Item2 рублей)</span></h4>
             </div>
             @if (_rent.Id == 0)

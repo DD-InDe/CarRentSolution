@@ -14,3 +14,33 @@
 .card{
     padding: 0;
 }
+
+.input-group {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i {
+    font-size: 1.2rem;
+}

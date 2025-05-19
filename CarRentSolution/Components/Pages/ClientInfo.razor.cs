@@ -1,4 +1,5 @@
 ﻿using CarRentSolution.Entity;
+using CarRentSolution.PageModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ public partial class ClientInfo : ComponentBase
 
     private List<Order> _orders;
     private Tenant _tenant;
+    private PageMessageModel _message = new();
 
     protected override async Task OnInitializedAsync()
     {

@@ -29,7 +29,9 @@ public partial class Auto
 
     public long? StatusId { get; set; }
 
-    public byte[]? Photo { get; set; }
+    public string? Photo { get; set; }
+
+    public string? PassportIssued { get; set; }
 
     public virtual Model Model { get; set; } = null!;
 

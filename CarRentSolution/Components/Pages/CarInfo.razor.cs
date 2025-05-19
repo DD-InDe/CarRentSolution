@@ -1,6 +1,7 @@
 ﻿using CarRentSolution.Entity;
 using CarRentSolution.PageModel;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentSolution.Components.Pages;
@@ -35,6 +36,33 @@ public partial class CarInfo : ComponentBase
             .ToListAsync();
 
         _isLoaded = true;
+    }
+    
+      
+    private async Task LoadImg(InputFileChangeEventArgs obj)
+    {
+        try
+        {
+            if(!obj.File.Name.ToLower().EndsWith(".jpg")) return;
+            long maxSize = 20000000; // максимальный размер файла (20 мб)
+            
+            MemoryStream memoryStream = new MemoryStream();
+            Stream stream = obj.File.OpenReadStream(maxSize); // открываем для чтения
+            await stream.CopyToAsync(memoryStream);
+            stream.Close(); // за
+            _auto.Photo = Convert.ToBase64String(memoryStream.ToArray());
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            obj
+                .File.OpenReadStream()
+                .Close();
+        }
     }
 
     private async Task Save()

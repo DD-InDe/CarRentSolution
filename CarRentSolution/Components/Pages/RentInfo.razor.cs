@@ -1,9 +1,10 @@
-﻿using Aspose.Words;
-using CarRentSolution.Entity;
+﻿using CarRentSolution.Entity;
 using CarRentSolution.PageModel;
+using CarRentSolution.Util;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
+using Xceed.Words.NET;
 
 namespace CarRentSolution.Components.Pages;
 
@@ -36,6 +37,8 @@ public partial class RentInfo : ComponentBase
                     .Include(c => c.Tenant)
                     .Include(c => c.RepairCondition)
                     .Include(c => c.Order)
+                    .Include(c => c.Auto)
+                    .Include(c => c.Auto.Model)
                     .FirstOrDefaultAsync(c => c.OrderId == OrderId) ?? new Rent()
                 {
                     OrderId = OrderId,
@@ -86,7 +89,7 @@ public partial class RentInfo : ComponentBase
         {
             return false;
         }
-        
+
         Tenant tenant = _tenants.First(c => c.Id == id);
         return tenant.TenantDocument?.Passport == null || tenant.TenantDocument?.DriveLicense == null;
     }
@@ -190,22 +193,85 @@ public partial class RentInfo : ComponentBase
         return new Tuple<decimal, decimal>(fullPrice, penalties);
     }
 
-    private void GenerateFile()
+    private async Task<byte[]> GenerateFile()
     {
-        Document document = new Document();
-        
-        
-        
+        var document = DocX.Load("Documents/template.docx");
+        try
+        {
+            Company company = (await Db.Companies.ToListAsync()).Last();
+
+            Tuple<string, string>[] values = new[]
+            {
+                new Tuple<string, string>("day_create", _rent.DateCreated.Day.ToString()),
+                new Tuple<string, string>("month_create", DateUtil.GetMonthName(_rent.DateCreated.Month).ToLower()),
+                new Tuple<string, string>("year_create", _rent.DateCreated.Year.ToString()),
+                new Tuple<string, string>("company_name", company.Name),
+                new Tuple<string, string>("company_boss", company.Boss),
+                new Tuple<string, string>("document_boss", company.Document),
+                new Tuple<string, string>("client_name", _rent.Tenant.FullName),
+                new Tuple<string, string>("client_pass_s", _rent.Tenant.PassportSerial),
+                new Tuple<string, string>("client_pass_n", _rent.Tenant.PassportNumber),
+                new Tuple<string, string>("client_pass_by", _rent.Tenant.PassportIssued),
+                new Tuple<string, string>("client_address", _rent.Tenant.Address),
+                new Tuple<string, string>("auto_model", _rent.Auto.Model.Name),
+                new Tuple<string, string>("auto_year", _rent.Auto.Year.ToString()),
+                new Tuple<string, string>("auto_vin", _rent.AutoId),
+                new Tuple<string, string>("auto_engine", _rent.Auto.Engine),
+                new Tuple<string, string>("auto_body", _rent.Auto.Body),
+                new Tuple<string, string>("auto_color", _rent.Auto.Color.ToLower()),
+                new Tuple<string, string>("auto_number", _rent.Auto.GovNumber),
+                new Tuple<string, string>("auto_pass_n", _rent.Auto.Passport),
+                new Tuple<string, string>("auto_pass_by", _rent.Auto.PassportIssued ?? "-"),
+                new Tuple<string, string>("auto_pass_date", _rent.Auto.PassportDated.ToString()),
+                new Tuple<string, string>("rent_fix", _rent.RepairCondition.Name),
+                new Tuple<string, string>("rent_price", _rent.FinishPrice.ToString()),
+                new Tuple<string, string>("rent_start_day", _rent.DateStart.Day.ToString()),
+                new Tuple<string, string>("rent_start_month", DateUtil.GetMonthName(_rent.DateStart.Month)),
+                new Tuple<string, string>("rent_start_year", _rent.DateStart.Year.ToString()),
+                new Tuple<string, string>("rent_end_day", _rent.DateEnd.Day.ToString()),
+                new Tuple<string, string>("rent_end_month", DateUtil.GetMonthName(_rent.DateEnd.Month)),
+                new Tuple<string, string>("rent_end_year", _rent.DateEnd.Year.ToString()),
+                new Tuple<string, string>("rent_peny", _rent.Penalties.ToString()),
+                new Tuple<string, string>("auto_fullprice", _rent.Auto.FullPrice.ToString()),
+                new Tuple<string, string>("company_address", company.LegalAddress),
+                new Tuple<string, string>("company_email", company.Email),
+                new Tuple<string, string>("company_inn", company.Inn),
+                new Tuple<string, string>("company_kpp", company.Kpp),
+                new Tuple<string, string>("company_r", company.CurrentAccount),
+                new Tuple<string, string>("company_k", company.CorrespondentAccount),
+                new Tuple<string, string>("company_bik", company.Bik),
+                new Tuple<string, string>("client_phone", _rent.Tenant.Phone),
+                new Tuple<string, string>("client_email", _rent.Tenant.Email ?? "-"),
+                new Tuple<string, string>("client_pass_date", _rent.Tenant.PassportDated.ToString()),
+                new Tuple<string, string>("client_pass_s2", _rent.Tenant.PassportSerial),
+                new Tuple<string, string>("client_pass_n2", _rent.Tenant.PassportNumber),
+                new Tuple<string, string>("client_pass_by2", _rent.Tenant.PassportIssued),
+                new Tuple<string, string>("client_address2", _rent.Tenant.Address)
+            };
+
+            foreach (var value in values)
+            {
+                Console.WriteLine($"{value.Item1} - {value.Item2}");
+                var bookmark = document.Bookmarks[value.Item1];
+                bookmark.SetText(value.Item2);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
         MemoryStream memoryStream = new MemoryStream();
-        document.Save(memoryStream, SaveFormat.Docx);
+        document.SaveAs(memoryStream);
+        return memoryStream.ToArray();
     }
 
     private async Task DownloadFile()
     {
-        byte[] fileContent;
-        string fileName = $"{_rent.DateCreated}_{_rent.AutoId}-.docx";
+        byte[] fileContent = await GenerateFile();
+        string fileName = $"{_rent.DateCreated}_{_rent.AutoId}.docx";
 
-        // await GetFile(fileContent, fileName);
+        await GetFile(fileContent, fileName);
     }
 
     private async Task GetFile(byte[] currentFileBytes, string currentFileName)

@@ -1,4 +1,7 @@
-﻿namespace CarRentSolution.Entity;
+﻿using System;
+using System.Collections.Generic;
+
+namespace CarRentSolution.Entity;
 
 public partial class Rent
 {

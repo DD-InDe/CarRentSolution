@@ -46,7 +46,7 @@
                 <div
                     style="margin: 5px"
                     class="form-group">
-                    <label>Пени (%)</label>
+                    <label>Пени (% от ущерба)</label>
                     <input
                         disabled="@_isView"
                         type="number"
@@ -162,8 +162,7 @@
             </div>
 
             <div class="order-card">
-                <h4 class="card-title">Финальная стоимость: <span style="color: black; font-weight: normal">@GetPrice().Item1 рублей и пени в размере @_rent.Penalties%
-                        (@GetPrice().Item2 рублей)</span></h4>
+                <h4 class="card-title">Финальная стоимость: <span style="color: black; font-weight: normal">@GetPrice().Item1 рублей</span></h4>
             </div>
             @if (_rent.Id == 0)
             {

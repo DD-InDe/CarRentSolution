@@ -1,0 +1,73 @@
+.input-group[b-sqchdo33mb] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-sqchdo33mb] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-sqchdo33mb] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-sqchdo33mb] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-sqchdo33mb] {
+    font-size: 1.2rem;
+}
+
+table[b-sqchdo33mb] {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: auto;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+th[b-sqchdo33mb], td[b-sqchdo33mb] {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Синяя шапка */
+    color: white;
+}
+
+td[b-sqchdo33mb] {
+    min-width: 200px;
+    background-color: #f9f9f9; /* Светлый фон для ячеек */
+}
+
+tr:nth-child(even) td[b-sqchdo33mb] {
+    background-color: #eaeaea; /* Светло-серый фон для четных строк */
+}
+
+tr:hover td[b-sqchdo33mb] {
+    background-color: #d1e7ff; /* Цвет при наведении на строку */
+}
+
+.info-button[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Основной цвет */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px 20px; /* Отступы */
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+.info-button:hover[b-sqchdo33mb] {
+    background-color: #155a8a; /* Темнее при наведении */
+}

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentSolution", "CarRentSolution\CarRentSolution.csproj", "{558ED3B1-7EB2-4A3E-A613-086E16A9F1F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{4A13B15E-6135-4AF9-90C7-7CCCC57FF298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{558ED3B1-7EB2-4A3E-A613-086E16A9F1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{558ED3B1-7EB2-4A3E-A613-086E16A9F1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{558ED3B1-7EB2-4A3E-A613-086E16A9F1F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A13B15E-6135-4AF9-90C7-7CCCC57FF298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A13B15E-6135-4AF9-90C7-7CCCC57FF298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A13B15E-6135-4AF9-90C7-7CCCC57FF298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A13B15E-6135-4AF9-90C7-7CCCC57FF298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

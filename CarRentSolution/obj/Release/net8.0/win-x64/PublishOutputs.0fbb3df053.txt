@@ -1,0 +1,6 @@
+C:\Users\alena\appsettings.Development.json
+C:\Users\alena\appsettings.json
+C:\Users\alena\CarRentSolution.pdb
+C:\Users\alena\aspnetcorev2_inprocess.dll
+C:\Users\alena\libSkiaSharp.dll
+C:\Users\alena\CarRentSolution.exe

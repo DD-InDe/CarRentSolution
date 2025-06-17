@@ -1,0 +1,46 @@
+.order-container[b-w7t75j883w] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body[b-w7t75j883w] {
+    padding: 1.25rem;
+}
+
+.card[b-w7t75j883w]{
+    padding: 0;
+}
+
+.input-group[b-w7t75j883w] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group[b-w7t75j883w] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-w7t75j883w] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-w7t75j883w] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-w7t75j883w] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-w7t75j883w] {
+    font-size: 1.2rem;
+}

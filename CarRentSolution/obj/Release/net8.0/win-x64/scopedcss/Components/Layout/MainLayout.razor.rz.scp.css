@@ -1,0 +1,61 @@
+.page[b-j985qzeck3] {
+    background: #dfdfdf;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden; /* Убирает прокрутку на уровне всей страницы */
+    height: 100vh;
+}
+
+.top-nav[b-j985qzeck3] {
+    background-color: #1b6ec2;
+    padding: 15px 20px; /* Отступы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Тень */
+    flex-shrink: 0;
+}
+
+.top-nav ul[b-j985qzeck3] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Центрирование элементов */
+}
+
+.top-nav li[b-j985qzeck3] {
+    margin: 0 15px; /* Отступы между элементами */
+}
+
+.nav-button[b-j985qzeck3] {
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    border: 2px solid white; /* Белая рамка */
+    padding: 10px 20px; /* Отступы для ссылок */
+    border-radius: 25px; /* Закругленные углы */
+    cursor: pointer; /* Курсор при наведении */
+    font-size: 16px; /* Размер шрифта */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Плавный переход */
+}   
+
+.nav-button:hover[b-j985qzeck3] {
+    background-color: rgba(0, 0, 0, 0.52); /* Эффект при наведении */
+    color: #ffffff; /* Цвет текста при наведении */
+    transform: scale(1.05); /* Увеличение ссылки при наведении */
+}
+
+.nav-button.active[b-j985qzeck3] {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.3); /* Фон для активной ссылки */
+    color: #4a3739; /* Цвет текста для активной ссылки */
+}
+
+.content[b-j985qzeck3] {
+    margin: auto;
+    border-radius: 5px;
+    background: whitesmoke;
+    width: 90vw;
+    height: 90vh;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    flex: 1;
+}

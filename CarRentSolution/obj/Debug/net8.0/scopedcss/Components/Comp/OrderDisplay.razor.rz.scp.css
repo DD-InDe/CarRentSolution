@@ -1,0 +1,16 @@
+.order-container[b-648sbetfj9] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body[b-648sbetfj9] {
+    padding: 1.25rem;
+}
+
+.card[b-648sbetfj9]{
+    padding: 0;
+}

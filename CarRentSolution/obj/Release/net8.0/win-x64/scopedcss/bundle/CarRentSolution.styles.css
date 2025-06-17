@@ -1,0 +1,542 @@
+/* _content/CarRentSolution/Components/Comp/OrderDisplay.razor.rz.scp.css */
+.order-container[b-648sbetfj9] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body[b-648sbetfj9] {
+    padding: 1.25rem;
+}
+
+.card[b-648sbetfj9]{
+    padding: 0;
+}
+/* _content/CarRentSolution/Components/Layout/MainLayout.razor.rz.scp.css */
+.page[b-j985qzeck3] {
+    background: #dfdfdf;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden; /* Убирает прокрутку на уровне всей страницы */
+    height: 100vh;
+}
+
+.top-nav[b-j985qzeck3] {
+    background-color: #1b6ec2;
+    padding: 15px 20px; /* Отступы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Тень */
+    flex-shrink: 0;
+}
+
+.top-nav ul[b-j985qzeck3] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Центрирование элементов */
+}
+
+.top-nav li[b-j985qzeck3] {
+    margin: 0 15px; /* Отступы между элементами */
+}
+
+.nav-button[b-j985qzeck3] {
+    background-color: transparent; /* Прозрачный фон */
+    color: white; /* Цвет текста */
+    border: 2px solid white; /* Белая рамка */
+    padding: 10px 20px; /* Отступы для ссылок */
+    border-radius: 25px; /* Закругленные углы */
+    cursor: pointer; /* Курсор при наведении */
+    font-size: 16px; /* Размер шрифта */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Плавный переход */
+}   
+
+.nav-button:hover[b-j985qzeck3] {
+    background-color: rgba(0, 0, 0, 0.52); /* Эффект при наведении */
+    color: #ffffff; /* Цвет текста при наведении */
+    transform: scale(1.05); /* Увеличение ссылки при наведении */
+}
+
+.nav-button.active[b-j985qzeck3] {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.3); /* Фон для активной ссылки */
+    color: #4a3739; /* Цвет текста для активной ссылки */
+}
+
+.content[b-j985qzeck3] {
+    margin: auto;
+    border-radius: 5px;
+    background: whitesmoke;
+    width: 90vw;
+    height: 90vh;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    flex: 1;
+}
+/* _content/CarRentSolution/Components/Pages/CarInfo.razor.rz.scp.css */
+.order-card[b-2lz3buplmi] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
+}
+
+.card-title[b-2lz3buplmi] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.custom-file-label.selected[b-2lz3buplmi]::after {
+    content: "" !important;
+}
+
+.img-car[b-2lz3buplmi]{
+    width: 100%;
+    max-height: 50vh;
+    object-fit: cover;
+    object-position: center;
+}
+/* _content/CarRentSolution/Components/Pages/CarsView.razor.rz.scp.css */
+.grid-container[b-6zgv3msn57] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.card[b-6zgv3msn57] {
+    border: none;
+    height: 37vh;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card:hover[b-6zgv3msn57] {
+    transform: translateY(-5px);
+}
+
+.card-img-top[b-6zgv3msn57] {
+    height: 30vh;
+    object-fit: cover;
+}
+
+.card-body[b-6zgv3msn57] {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 1.25rem;
+}
+
+.card-title[b-6zgv3msn57] {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text[b-6zgv3msn57] {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-img[b-6zgv3msn57] {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-height: 50vh;
+    object-fit: contain;
+}
+
+.color-indicator[b-6zgv3msn57] {
+    width: 80%;
+    height: 20px;
+    display: inline-block;
+    margin-right: 0.5rem;
+    border: black 1px solid;
+}
+
+.modal[b-6zgv3msn57] {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Остается на месте */
+    z-index: 1000; /* На переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Прокрутка при необходимости */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+}
+
+.modal-content[b-6zgv3msn57] {
+    background-color: #fefefe;
+    margin: auto; /* 15% сверху и центрирование */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Ширина модального окна */
+}
+
+.close[b-6zgv3msn57] {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover[b-6zgv3msn57],
+.close:focus[b-6zgv3msn57] {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input-group[b-6zgv3msn57] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-6zgv3msn57] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-6zgv3msn57] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-6zgv3msn57] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-6zgv3msn57] {
+    font-size: 1.2rem;
+}
+
+.grid-container[b-6zgv3msn57] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-gap: 5px;
+}
+
+.grid-item[b-6zgv3msn57] {
+    grid-column: span 3;
+}
+
+.grid-item:nth-child(4)[b-6zgv3msn57] {
+    grid-column: 1 / 4;
+}
+
+.cars-container[b-6zgv3msn57] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 68vh;
+    overflow-y: auto;
+}
+
+.card[b-6zgv3msn57]{
+    background-color: #1b6ec2;
+    color: white;
+}
+
+.card .btn-primary[b-6zgv3msn57]{
+    background-color: white;
+    color: #1b6ec2;
+}
+/* _content/CarRentSolution/Components/Pages/ClientInfo.razor.rz.scp.css */
+.order-card[b-1tj9kobv6y] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
+}
+
+.card-title[b-1tj9kobv6y] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.custom-file-label.selected[b-1tj9kobv6y]::after {
+    content: "" !important;
+}
+/* _content/CarRentSolution/Components/Pages/ClientView.razor.rz.scp.css */
+.input-group[b-sqchdo33mb] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-sqchdo33mb] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-sqchdo33mb] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-sqchdo33mb] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-sqchdo33mb] {
+    font-size: 1.2rem;
+}
+
+table[b-sqchdo33mb] {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: auto;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+th[b-sqchdo33mb], td[b-sqchdo33mb] {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Синяя шапка */
+    color: white;
+}
+
+td[b-sqchdo33mb] {
+    min-width: 200px;
+    background-color: #f9f9f9; /* Светлый фон для ячеек */
+}
+
+tr:nth-child(even) td[b-sqchdo33mb] {
+    background-color: #eaeaea; /* Светло-серый фон для четных строк */
+}
+
+tr:hover td[b-sqchdo33mb] {
+    background-color: #d1e7ff; /* Цвет при наведении на строку */
+}
+
+.info-button[b-sqchdo33mb] {
+    background-color: #1b6ec2; /* Основной цвет */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px 20px; /* Отступы */
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+.info-button:hover[b-sqchdo33mb] {
+    background-color: #155a8a; /* Темнее при наведении */
+}
+/* _content/CarRentSolution/Components/Pages/LogIn.razor.rz.scp.css */
+.container[b-75smtxn952] {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-color: #f5f5f5;
+}
+
+.card[b-75smtxn952] {
+    border-radius: 10px;
+    width: 400px;
+}
+
+.form-group[b-75smtxn952] {
+    margin-bottom: 20px;
+}
+
+.form-control[b-75smtxn952] {
+    border-radius: 5px;
+}
+
+.btn-primary[b-75smtxn952] {
+    background-color: #1b6ec2;
+    border-color: #1b6ec2;
+    width: 100%;
+}
+
+.btn-primary:hover[b-75smtxn952] {
+    background-color: #0056b3;
+    border-color: #004a99;
+}
+/* _content/CarRentSolution/Components/Pages/OrderInfo.razor.rz.scp.css */
+.order-details[b-c37ip3y6lk] {
+    padding: 10px 20px;
+}
+
+.order-title[b-c37ip3y6lk] {
+    text-align: center;
+    color: #1b6ec2;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.order-card[b-c37ip3y6lk] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
+}
+
+.card-title[b-c37ip3y6lk] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}   
+
+.order-actions[b-c37ip3y6lk] {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn[b-c37ip3y6lk] {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0 10px;
+}
+
+.btn-danger[b-c37ip3y6lk] {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover[b-c37ip3y6lk] {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.btn-success[b-c37ip3y6lk] {
+    background-color: #28a745;
+}
+
+.btn-success:hover[b-c37ip3y6lk] {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.history-title[b-c37ip3y6lk] {
+    margin-top: 30px;
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table[b-c37ip3y6lk] {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th[b-c37ip3y6lk], td[b-c37ip3y6lk] {
+    padding: 12px;
+}
+
+th[b-c37ip3y6lk] {
+    background-color: #1b6ec2;
+    color: white;
+}
+
+tr:nth-child(even)[b-c37ip3y6lk] {
+    background-color: #ffffff;
+}
+
+tr:hover[b-c37ip3y6lk] {
+    background-color: #e8e8e8;
+}
+/* _content/CarRentSolution/Components/Pages/OrderView.razor.rz.scp.css */
+.order-container[b-w7t75j883w] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.card-body[b-w7t75j883w] {
+    padding: 1.25rem;
+}
+
+.card[b-w7t75j883w]{
+    padding: 0;
+}
+
+.input-group[b-w7t75j883w] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group[b-w7t75j883w] {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.input-group .form-control[b-w7t75j883w] {
+    border: none;
+    box-shadow: none;
+}
+
+.input-group-append .btn[b-w7t75j883w] {
+    border: none;
+    background-color: #1b6ec2;
+    color: #fff;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-group-append .btn:hover[b-w7t75j883w] {
+    background-color: #0056b3;
+}
+
+.input-group-append .btn i[b-w7t75j883w] {
+    font-size: 1.2rem;
+}
+/* _content/CarRentSolution/Components/Pages/RentInfo.razor.rz.scp.css */
+.order-card[b-ltueutw2qb] {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1b6ec2;
+}
+
+.card-title[b-ltueutw2qb] {
+    color: #1b6ec2;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.custom-file-label.selected[b-ltueutw2qb]::after {
+    content: "" !important;
+}

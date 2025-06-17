@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\obj\\Release\\net8.0\\win-x64\\scopedcss\\projectbundle\\CarRentSolution.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CarRentSolution.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\empty.png",
+      "PackagePath": "staticwebassets\\empty.png"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\alena\\RiderProjects\\Diplom\\CarRentSolution\\CarRentSolution\\wwwroot\\scripts\\download.js",
+      "PackagePath": "staticwebassets\\scripts\\download.js"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.CarRentSolution.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.build.CarRentSolution.props",
+      "PackagePath": "build\\CarRentSolution.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildMultiTargeting.CarRentSolution.props",
+      "PackagePath": "buildMultiTargeting\\CarRentSolution.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildTransitive.CarRentSolution.props",
+      "PackagePath": "buildTransitive\\CarRentSolution.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
